@@ -32,6 +32,25 @@ public class ComunidadUniversitaria {
       return instance;
    }
    
+   
+   public Person getPerson(String id, String type){
+        Object obj = new Person(null, id, type, null, null, null);
+        if(type.equalsIgnoreCase(Person.PROFESOR)){
+            int x = profesores.lastIndexOf(obj);
+            return profesores.get(x);
+        }else if(type.equalsIgnoreCase(Person.ESTUDIANTE)){
+            int x = estudiantes.lastIndexOf(obj);
+            return estudiantes.get(x);
+        }else if(type.equalsIgnoreCase(Person.EGRESADO)){
+            int x = egresados.lastIndexOf(obj);
+            return egresados.get(x);
+        }else if(type.equalsIgnoreCase(Person.EMPLEADO)){
+            int x = empleados.lastIndexOf(obj);
+            return empleados.get(x);
+        }
+        return null;
+   }
+   
     public void loadCU(){
         BufferedReader br = null;
         try {

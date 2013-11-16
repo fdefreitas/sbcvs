@@ -137,7 +137,6 @@ public class Person {
         int hash = 7;
         hash = 37 * hash + Objects.hashCode(this.id);
         hash = 37 * hash + Objects.hashCode(this.type);
-        hash = 37 * hash + Objects.hashCode(this.school);
         return hash;
     }
     

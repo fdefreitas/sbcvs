@@ -27,9 +27,28 @@ public class UI extends javax.swing.JFrame {
      */
     public UI() {
         initComponents();
-        persons = new ArrayList<Person>();
         cu = ComunidadUniversitaria.getInstance();
         cu.loadCU();
+        String[] persons = new String[cu.profesores.size()+cu.estudiantes.size()+cu.egresados.size()+cu.empleados.size()];
+        int i = 0;
+        for(Person p : cu.profesores){
+            persons[i] = p.getId() + " - " + p.getName() + " - " + p.getType();
+            ++i;
+        }
+        for(Person p : cu.estudiantes){
+            persons[i] = p.getId() + " - " + p.getName() + " - " + p.getType();
+            ++i;
+        }
+        for(Person p : cu.egresados){
+            persons[i] = p.getId() + " - " + p.getName() + " - " + p.getType();
+            ++i;
+        }
+        for(Person p : cu.empleados){
+            persons[i] = p.getId() + " - " + p.getName() + " - " + p.getType();
+            ++i;
+        }
+                
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(persons));
     }
 
     /**
@@ -174,17 +193,23 @@ public class UI extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_ConvocarButtonActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            for (Person p : cu.estudiantes){
-                if(loadCLIPS()){
-                    p.isValid(e);
-                    //DIAGNOSTICO
-                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
-                    List hec = P.multifieldValue();
-                    System.out.println(hec.size());
+            String[] params = ((String)(jComboBox2.getSelectedItem())).split(" - ");
+            Person aux = cu.getPerson(params[0], params[2]);
+            System.out.println(aux.toString());
+            if(loadCLIPS()){
+                aux.isValid(e);
+                //DIAGNOSTICO
+                MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                List hec = P.multifieldValue();
+                if(hec.isEmpty()){
+                    JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName() + " puede ser candidato", "ERROR", JOptionPane.OK_OPTION);
+                } else {
+                    JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName() + " no puede ser candidato", "ERROR", JOptionPane.OK_OPTION);
                 }
+                e.reset();
             }
         } catch (Exception ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
@@ -238,7 +263,6 @@ public class UI extends javax.swing.JFrame {
         });
     }
     static Environment e;
-    private ArrayList<Person> persons;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConvocarButton;
     private javax.swing.JButton jButton2;

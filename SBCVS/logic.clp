@@ -35,8 +35,8 @@
 ;---
 
 (defrule r0
-	(persona (tipo estudiante)
-                 (status irregular))
+	(persona (tipo "estudiante")
+                 (status "Irregular"))
 	=>
 	(assert(candidato (nombre "No")))
 	(assert (regla (nombre "r0")))
