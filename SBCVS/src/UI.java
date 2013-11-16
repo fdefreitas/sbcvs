@@ -1,9 +1,11 @@
 
-import CLIPSJNI.Environment;
+import CLIPSJNI.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Person;
 
@@ -95,6 +97,11 @@ public class UI extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Candidato Apellido 1", "Candidato Apellido 2", "Candidato Apellido 3" }));
 
         jButton2.setText("Postular");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         verPostuladosButton.setText("Ver Candidatos Postulados");
         verPostuladosButton.setEnabled(false);
@@ -161,7 +168,29 @@ public class UI extends javax.swing.JFrame {
 
     private void ConvocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvocarButtonActionPerformed
         // TODO add your handling code here:
+        if(loadCLIPS()){
+            
+        }
     }//GEN-LAST:event_ConvocarButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            if(loadCLIPS()){
+                e.load("logic.clp");
+                e.assertString("(estudiante si)");
+                e.assertString("(regular no)");
+                e.run();
+                //DIAGNOSTICO
+                MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                List hec = P.multifieldValue();
+                System.out.println(hec.size());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            e.reset();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void loadCU(){
         BufferedReader br = null;
@@ -177,13 +206,13 @@ public class UI extends javax.swing.JFrame {
                 System.out.println(p.toString());
             }
             System.out.println(persons.size());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (br != null)br.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            } catch (Exception ex) {
+                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
