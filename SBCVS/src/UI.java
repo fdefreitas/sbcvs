@@ -33,10 +33,12 @@ public class UI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        ConvocarButton = new javax.swing.JButton();
+        verRegistroButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jComboBox2 = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
+        verPostuladosButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,12 +50,15 @@ public class UI extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item Eleccion 1", "Item Eleccion 2", "Item Eleccion 3", "Item 4" }));
 
-        jButton1.setText("Convocar Eleccion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ConvocarButton.setText("Convocar Eleccion");
+        ConvocarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ConvocarButtonActionPerformed(evt);
             }
         });
+
+        verRegistroButton.setText("Ver Registro Electoral");
+        verRegistroButton.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,16 +68,19 @@ public class UI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addComponent(ConvocarButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(verRegistroButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ConvocarButton)
+                    .addComponent(verRegistroButton))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Postular Candidato"));
@@ -80,6 +88,9 @@ public class UI extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Candidato Apellido 1", "Candidato Apellido 2", "Candidato Apellido 3" }));
 
         jButton2.setText("Postular");
+
+        verPostuladosButton.setText("Ver Candidatos Postulados");
+        verPostuladosButton.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -90,6 +101,8 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addComponent(verPostuladosButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -98,8 +111,9 @@ public class UI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2)
+                    .addComponent(verPostuladosButton))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Cantarell", 0, 12)); // NOI18N
@@ -138,9 +152,9 @@ public class UI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ConvocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvocarButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ConvocarButtonActionPerformed
 
     
     private boolean loadCLIPS(){
@@ -189,7 +203,7 @@ public class UI extends javax.swing.JFrame {
     }
     static Environment e;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton ConvocarButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
@@ -197,5 +211,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton verPostuladosButton;
+    private javax.swing.JButton verRegistroButton;
     // End of variables declaration//GEN-END:variables
 }
