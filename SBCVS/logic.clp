@@ -6,7 +6,7 @@
 ;Proyecto
 
 ;---
-;Template de Persona
+;Templates
 ;---
 
 (deftemplate persona
@@ -18,13 +18,29 @@
 (slot escuela (type STRING))
 )
 
+(deftemplate regla
+	(slot nombre (type STRING))
+)
+
+(deftemplate candidato
+	(slot nombre (type STRING))
+)
+
 ;---
-;Fin Template de Persona
+;Fin Templates
 ;---
 
 ;---
 ;Reglas
 ;---
+
+(defrule r0
+	(estudiante si)
+	(status irregular)
+	=>
+	(assert(candidato (nombre "No")))
+	(assert (regla (nombre "r0")))
+	)
 
 ;---
 ;Fin Reglas
