@@ -198,9 +198,10 @@ public class UI extends javax.swing.JFrame {
         try {
             String[] params = ((String)(jComboBox2.getSelectedItem())).split(" - ");
             Person aux = cu.getPerson(params[0], params[2]);
-            System.out.println(aux.toString());
             if(loadCLIPS()){
-                aux.isValid(e);
+                e.load("logic.clp");
+                e.assertString(aux.toString());
+                e.run();
                 //DIAGNOSTICO
                 MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                 List hec = P.multifieldValue();
@@ -209,7 +210,6 @@ public class UI extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName() + " no puede ser candidato", "ERROR", JOptionPane.OK_OPTION);
                 }
-                e.reset();
             }
         } catch (Exception ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);

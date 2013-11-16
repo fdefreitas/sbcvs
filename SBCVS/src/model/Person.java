@@ -139,13 +139,5 @@ public class Person {
         hash = 37 * hash + Objects.hashCode(this.type);
         return hash;
     }
-    
-    public boolean isValid(Environment e){
-        
-        e.load("logic.clp");
-        e.assertString(this.toString());
-        e.run();
-        return false;
-    }
-    
+
 }
