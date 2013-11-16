@@ -1,6 +1,11 @@
 
 import CLIPSJNI.Environment;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import model.Person;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +24,8 @@ public class UI extends javax.swing.JFrame {
      */
     public UI() {
         initComponents();
+        persons = new ArrayList<Person>();
+        loadCU();
     }
 
     /**
@@ -157,7 +164,28 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_ConvocarButtonActionPerformed
 
     private void loadCU(){
-        
+        BufferedReader br = null;
+        try {
+            String sCurrentLine;
+            br = new BufferedReader(new FileReader("comunity.txt"));
+            while ((sCurrentLine = br.readLine()) != null) {
+                Person p = new Person(sCurrentLine);
+                persons.add(p.clone());
+            }
+            
+            for(Person p : persons){
+                System.out.println(p.toString());
+            }
+            System.out.println(persons.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null)br.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
     
     private boolean loadCLIPS(){
@@ -205,6 +233,7 @@ public class UI extends javax.swing.JFrame {
         });
     }
     static Environment e;
+    private ArrayList<Person> persons;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConvocarButton;
     private javax.swing.JButton jButton2;

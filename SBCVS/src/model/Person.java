@@ -18,6 +18,36 @@ public class Person {
     String school;
     String status;
 
+    public Person(String data) throws Exception {
+        String[] fields = data.split(",");
+        if(fields.length < 6){
+            throw new Exception("incomplete data exception");
+        }
+        for(int i =0; i < fields.length; ++i){
+            if(i == 0){
+                name = fields[i];
+            } else if(i == 1){
+                id = fields[i];
+            } else if(i == 2){
+                type = fields[i];
+            } else if(i == 3){
+                location = fields[i];
+            } else if(i == 4){
+                school = fields[i];
+            } else if(i == 5){
+                status = fields[i];
+            }
+        }
+    }
+
+    public Person() {
+    }
+    
+    @Override
+    public Person clone() throws CloneNotSupportedException {
+        return new Person(name, id, type, location, school, status);
+    }
+
     public Person(String name, String id, String type, String location, String school, String status) {
         this.name = name;
         this.id = id;
