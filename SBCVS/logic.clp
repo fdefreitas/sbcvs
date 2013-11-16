@@ -11,7 +11,7 @@
 
 (deftemplate persona
 (slot nombre (type STRING))
-(slot cedula (type NUMBER))
+(slot cedula (type STRING))
 (multislot tipo (type STRING))
 (slot status (type STRING))
 (slot nucleo (type STRING))
@@ -35,8 +35,8 @@
 ;---
 
 (defrule r0
-	(estudiante si)
-	(status irregular)
+	(persona (tipo estudiante)
+                 (status irregular))
 	=>
 	(assert(candidato (nombre "No")))
 	(assert (regla (nombre "r0")))

@@ -13,8 +13,8 @@ import java.util.logging.Logger;
  */
 public class ComunidadUniversitaria {
     private static ComunidadUniversitaria instance;
-    ArrayList<Person> profesores, estudiantes, egresados, empleados;
-    ArrayList<Person> representacionEgresados, representacionEstudiantil, gobierno;
+    public ArrayList<Person> profesores, estudiantes, egresados, empleados;
+    public ArrayList<Person> representacionEgresados, representacionEstudiantil, gobierno;
     
     protected ComunidadUniversitaria() {
         profesores = new ArrayList<>();
@@ -33,7 +33,6 @@ public class ComunidadUniversitaria {
    }
    
     public void loadCU(){
-        ArrayList<Person> persons = new ArrayList<>();
         BufferedReader br = null;
         try {
             String sCurrentLine, personType;

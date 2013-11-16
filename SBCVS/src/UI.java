@@ -99,6 +99,11 @@ public class UI extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Candidato Apellido 1", "Candidato Apellido 2", "Candidato Apellido 3" }));
 
         jButton2.setText("Postular");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         verPostuladosButton.setText("Ver Candidatos Postulados");
         verPostuladosButton.setEnabled(false);
@@ -172,15 +177,14 @@ public class UI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            if(loadCLIPS()){
-                e.load("logic.clp");
-//                e.assertString("(estudiante si)");
-//                e.assertString("(regular no)");
-                e.run();
-                //DIAGNOSTICO
-                MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
-                List hec = P.multifieldValue();
-                System.out.println(hec.size());
+            for (Person p : cu.estudiantes){
+                if(loadCLIPS()){
+                    p.isValid(e);
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                    List hec = P.multifieldValue();
+                    System.out.println(hec.size());
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
