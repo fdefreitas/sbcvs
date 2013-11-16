@@ -156,6 +156,9 @@ public class UI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ConvocarButtonActionPerformed
 
+    private void loadCU(){
+        
+    }
     
     private boolean loadCLIPS(){
         System.loadLibrary("CLIPSJNI");
