@@ -1,3 +1,7 @@
+
+import CLIPSJNI.Environment;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -138,6 +142,17 @@ public class UI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+    private boolean loadCLIPS(){
+        System.loadLibrary("CLIPSJNI");
+        e = new Environment();
+        if (e == null){
+            System.out.println("Error al intanciar CLIPSJNI");
+            JOptionPane.showMessageDialog(this,"Error al instanciar CLIPSJNI", "ERROR", JOptionPane.OK_OPTION);
+            return false;
+        }
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
@@ -172,7 +187,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
     }
-
+    static Environment e;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
