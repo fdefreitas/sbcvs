@@ -4,6 +4,7 @@
  */
 package model;
 
+import CLIPSJNI.Environment;
 import java.util.Objects;
 
 /**
@@ -113,10 +114,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return "{\"name\":\"" + name + "\", \"id\":\"" + id + "\", \"type\":\"" + type + "\", \"location\":\"" + location + "\", \"school\":\"" + school + "\", \"status\":\"" + status + "\"}";
+        return "(persona (nombre \""+name+"\") (cedula \""+id+"\") (tipo \""+type+"\") (status \""+status+"\") (nucleo \""+location+"\") (escuela \""+school+"\"))";
     }
-
-
 
     @Override
     public boolean equals(Object obj) {
@@ -132,6 +131,22 @@ public class Person {
         }
         return true;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.type);
+        hash = 37 * hash + Objects.hashCode(this.school);
+        return hash;
+    }
     
+    public boolean isValid(Environment e){
+        
+        e.load("logic.clp");
+        e.assertString(this.toString());
+        e.run();
+        return false;
+    }
     
 }

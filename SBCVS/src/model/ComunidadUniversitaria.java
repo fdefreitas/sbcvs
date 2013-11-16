@@ -17,7 +17,13 @@ public class ComunidadUniversitaria {
     ArrayList<Person> representacionEgresados, representacionEstudiantil, gobierno;
     
     protected ComunidadUniversitaria() {
-      // Exists only to defeat instantiation.
+        profesores = new ArrayList<>();
+        estudiantes = new ArrayList<>();
+        egresados = new ArrayList<>();
+        empleados = new ArrayList<>();
+        representacionEgresados = new ArrayList<>();
+        representacionEstudiantil = new ArrayList<>();
+        gobierno = new ArrayList<>();
    }
    public static ComunidadUniversitaria getInstance() {
       if(instance == null) {
@@ -46,11 +52,10 @@ public class ComunidadUniversitaria {
                 }
             }
 
-            System.out.println(persons.size()+" personas cargadas.");
-            for(Person p : persons){
-                System.out.println(p.toString());
-            }
-            
+            System.out.println(profesores.size()+" profesores cargadas.");
+            System.out.println(estudiantes.size()+" estudiantes cargadas.");
+            System.out.println(egresados.size()+" egresados cargadas.");
+            System.out.println(empleados.size()+" empleados cargadas.");
         } catch (Exception ex) {
             Logger.getLogger(ComunidadUniversitaria.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
