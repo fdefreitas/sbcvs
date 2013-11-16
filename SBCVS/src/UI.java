@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.ComunidadUniversitaria;
 import model.Person;
 
 /*
@@ -20,14 +21,15 @@ import model.Person;
  * @author fernando
  */
 public class UI extends javax.swing.JFrame {
-
+    ComunidadUniversitaria cu;
     /**
      * Creates new form UI
      */
     public UI() {
         initComponents();
         persons = new ArrayList<Person>();
-        loadCU();
+        cu = ComunidadUniversitaria.getInstance();
+        cu.loadCU();
     }
 
     /**
@@ -97,11 +99,6 @@ public class UI extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Candidato Apellido 1", "Candidato Apellido 2", "Candidato Apellido 3" }));
 
         jButton2.setText("Postular");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         verPostuladosButton.setText("Ver Candidatos Postulados");
         verPostuladosButton.setEnabled(false);
@@ -177,8 +174,8 @@ public class UI extends javax.swing.JFrame {
         try {
             if(loadCLIPS()){
                 e.load("logic.clp");
-                e.assertString("(estudiante si)");
-                e.assertString("(regular no)");
+//                e.assertString("(estudiante si)");
+//                e.assertString("(regular no)");
                 e.run();
                 //DIAGNOSTICO
                 MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
@@ -191,31 +188,6 @@ public class UI extends javax.swing.JFrame {
             e.reset();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void loadCU(){
-        BufferedReader br = null;
-        try {
-            String sCurrentLine;
-            br = new BufferedReader(new FileReader("comunity.txt"));
-            while ((sCurrentLine = br.readLine()) != null) {
-                Person p = new Person(sCurrentLine);
-                persons.add(p.clone());
-            }
-            
-            for(Person p : persons){
-                System.out.println(p.toString());
-            }
-            System.out.println(persons.size());
-        } catch (Exception ex) {
-            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (br != null)br.close();
-            } catch (Exception ex) {
-                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
     
     private boolean loadCLIPS(){
         System.loadLibrary("CLIPSJNI");

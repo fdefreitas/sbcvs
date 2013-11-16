@@ -11,6 +11,12 @@ import java.util.Objects;
  * @author Administrador
  */
 public class Person {
+    
+    static final String PROFESOR = "profesor";    
+    static final String ESTUDIANTE = "estudiante";
+    static final String EGRESADO = "egresado";
+    static final String EMPLEADO = "empleado";
+    
     String name;
     String id;
     String type;
