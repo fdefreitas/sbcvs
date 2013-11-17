@@ -30,6 +30,15 @@ public class ComunidadUniversitaria {
       return instance;
    }
    
+   public void clearInstance(){
+       profesores.clear();
+       estudiantes.clear();
+       egresados.clear();
+       empleados.clear();
+       registro.clear();
+       postulados.clear();
+       instance = null;
+   }
    
    public Person getPerson(String id, String type){
         Object obj = new Person(null, id, type, null, null, null);

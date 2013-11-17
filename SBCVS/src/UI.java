@@ -169,6 +169,11 @@ public class UI extends javax.swing.JFrame {
         salirButton.setText("Salir");
 
         reiniciarButton.setText("Reiniciar");
+        reiniciarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reiniciarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -325,6 +330,14 @@ public class UI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay candidatos postulados", "Alerta", JOptionPane.OK_OPTION);
         list.delete(0, list.length());
     }//GEN-LAST:event_verPostuladosButtonActionPerformed
+
+    private void reiniciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarButtonActionPerformed
+        cu.clearInstance();
+        cu = ComunidadUniversitaria.getInstance();
+        cu.loadCU(); 
+        verPostuladosButton.setEnabled(false);
+        verRegistroButton.setEnabled(false);
+    }//GEN-LAST:event_reiniciarButtonActionPerformed
     
     private boolean loadCLIPS(){
         System.loadLibrary("CLIPSJNI");
