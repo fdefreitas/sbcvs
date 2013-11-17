@@ -41,8 +41,7 @@
 ;---
 
 (defrule r0
-	(persona (tipo "estudiante")
-                 (status "irregular"))
+	(persona (tipo "estudiante")(status "irregular"))
 	=>
 	(assert(candidato (nombre "No")))
 	(assert (regla (nombre "r0")))
@@ -51,6 +50,7 @@
 ;Eleccion Rector
 (defrule r1 "eleccion rector"
 	(eleccion (tipo "rector"))
+	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "r1")))
@@ -59,6 +59,7 @@
 ; Eleccion Vicerrector
 (defrule r2 "eleccion vicerrector"
 	(eleccion (tipo "vicerrector"))
+	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "r2")))
@@ -67,6 +68,7 @@
 ;Eleccion Secretario
 (defrule r3 "eleccion secretario"
 	(eleccion (tipo "secretario"))
+	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "r3")))
