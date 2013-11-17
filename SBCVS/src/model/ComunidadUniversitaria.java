@@ -13,17 +13,15 @@ import java.util.logging.Logger;
  */
 public class ComunidadUniversitaria {
     private static ComunidadUniversitaria instance;
-    public ArrayList<Person> profesores, estudiantes, egresados, empleados;
-    public ArrayList<Person> representacionEgresados, representacionEstudiantil, gobierno;
+    public ArrayList<Person> profesores, estudiantes, egresados, empleados, registro, postulados;
     
     protected ComunidadUniversitaria() {
         profesores = new ArrayList<>();
         estudiantes = new ArrayList<>();
         egresados = new ArrayList<>();
         empleados = new ArrayList<>();
-        representacionEgresados = new ArrayList<>();
-        representacionEstudiantil = new ArrayList<>();
-        gobierno = new ArrayList<>();
+        registro = new ArrayList<>();
+        postulados = new ArrayList<>();
    }
    public static ComunidadUniversitaria getInstance() {
       if(instance == null) {
