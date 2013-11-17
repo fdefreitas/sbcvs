@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.ComunidadUniversitaria;
 import model.Eleccion;
+import model.Operacion;
 import model.Person;
 
 /*
@@ -31,7 +32,7 @@ public class UI extends javax.swing.JFrame {
         String[] persons = new String[cu.profesores.size()+cu.estudiantes.size()+cu.egresados.size()+cu.empleados.size()];
         int i = 0;
         for(Person p : cu.comunidad){
-            persons[i] = p.getId() + " - " + p.getName() + " - " + p.getType();
+            persons[i] = p.getId() + " - " + p.getName() + " - " + p.getType() + " - " + p.getLocation();
             ++i;
         }
         eleccionPicker.setModel(new javax.swing.DefaultComboBoxModel(cu.elecciones.toArray()));
@@ -219,7 +220,7 @@ public class UI extends javax.swing.JFrame {
             cu.registro.clear();
             ArrayList<String> result = new ArrayList<>();
             boolean flag = true;
-            Eleccion eleccion = (Eleccion) eleccionPicker.getSelectedItem();
+            eleccion = (Eleccion) eleccionPicker.getSelectedItem();
             for(Person p : cu.profesores){
                 if (loadCLIPS()) {
                     e.load("logic.clp");
@@ -347,11 +348,16 @@ public class UI extends javax.swing.JFrame {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
+            Operacion op = new Operacion("postular");
             String[] params = ((String)(candidatoPicker.getSelectedItem())).split(" - ");
             Person aux = cu.getPerson(params[0], params[2]);
+            System.out.println(aux.toString());
+            System.out.println(eleccion.toString2());
             if(aux != null && loadCLIPS()){
                 e.load("logic.clp");
                 e.assertString(aux.toString());
+                e.assertString(eleccion.toString2());
+    //            e.assertString(op.toString());
                 e.run();
                 //DIAGNOSTICO
                 MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
@@ -453,6 +459,7 @@ public class UI extends javax.swing.JFrame {
         });
     }
     static Environment e;
+    Eleccion eleccion;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConvocarButton;
     private javax.swing.JComboBox candidatoPicker;

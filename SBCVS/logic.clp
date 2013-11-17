@@ -18,6 +18,10 @@
 (slot escuela (type STRING))
 )
 
+(deftemplate operacion
+	(slot nombre (type STRING))	
+)
+
 (deftemplate eleccion
 	(slot tipo (type STRING))
 	(slot nucleo (type STRING))
@@ -49,6 +53,16 @@
 	=>
 	(assert(candidato (nombre "No")))
 	(assert (regla (nombre "r0")))
+)
+
+(defrule r6
+    (operacion(nombre "postular"))
+    (eleccion (nucleo ?n))
+    (persona (nucleo ?np & ?n))
+    =>
+    (printout t ?np " " ?n " " crlf)
+    (assert(candidato (nombre "No")))
+    (assert (regla (nombre "r6")))
 )
 
 ; ------------------------------- 
