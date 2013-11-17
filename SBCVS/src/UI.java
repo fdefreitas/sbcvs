@@ -215,6 +215,7 @@ public class UI extends javax.swing.JFrame {
     private void ConvocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvocarButtonActionPerformed
         // TODO add your handling code here:
         try {
+            cu.registro.clear();
             ArrayList<String> result = new ArrayList<>();
             boolean flag = true;
             String eleccion = ((String)(eleccionPicker.getSelectedItem())).toLowerCase();
