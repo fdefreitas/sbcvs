@@ -371,15 +371,9 @@ public class UI extends javax.swing.JFrame {
     private void verRegistroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verRegistroButtonActionPerformed
         StringBuilder list = new StringBuilder();
         if(!cu.registro.isEmpty()) {
-            list.append("CI \t Nombre \t Tipo\n");
+            list.append(String.format("%-32s %-48s %s\n","CI", "Nombre", "Tipo"));
             for (Person p : cu.registro) {
-//                list.append(p.getId().toUpperCase()+" \t");
-//                list.append(" \t");
-//                list.append(p.getName());
-//                list.append(" \t");
-//                list.append(p.getType());
-//                list.append("\n");
-                list.append(String.format("%-12s %-32s %-12s\n",p.getId(), p.getName(), p.getType()));
+                list.append(String.format("%-16s %-48s %s\n",p.getId().toUpperCase(), p.getName().toUpperCase(), p.getType().toUpperCase()));
             }
         }
         JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay nadie habilitado para votar", "Alerta", JOptionPane.OK_OPTION);
@@ -389,14 +383,9 @@ public class UI extends javax.swing.JFrame {
     private void verPostuladosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPostuladosButtonActionPerformed
         StringBuilder list = new StringBuilder();
         if(!cu.postulados.isEmpty()) {
-            list.append("CI \t Nombre \t Tipo\n");
+            list.append(String.format("%-32s %-48s %s\n","CI", "Nombre", "Tipo"));
             for (Person p : cu.postulados) {
-                list.append(p.getId());
-                list.append(" \t");
-                list.append(p.getName());
-                list.append(" \t");
-                list.append(p.getType());
-                list.append("\n");
+                list.append(String.format("%-16s %-48s %s\n",p.getId().toUpperCase(), p.getName().toUpperCase(), p.getType().toUpperCase()));
             }
         }
         JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay candidatos postulados", "Alerta", JOptionPane.OK_OPTION);
