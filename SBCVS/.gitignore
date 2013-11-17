@@ -12,7 +12,6 @@ nb-configuration.xml
 
 # Class Files #
 *.class
-*.form
 
 # Package Files #
 *.jar

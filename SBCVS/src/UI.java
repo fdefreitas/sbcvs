@@ -55,7 +55,7 @@ public class UI extends javax.swing.JFrame {
         verRegistroButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         candidatoPicker = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
+        postularButton = new javax.swing.JButton();
         verPostuladosButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         salirButton = new javax.swing.JButton();
@@ -114,10 +114,11 @@ public class UI extends javax.swing.JFrame {
 
         candidatoPicker.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Candidato Apellido 1", "Candidato Apellido 2", "Candidato Apellido 3" }));
 
-        jButton2.setText("Postular");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        postularButton.setText("Postular");
+        postularButton.setEnabled(false);
+        postularButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                postularButtonActionPerformed(evt);
             }
         });
 
@@ -138,7 +139,7 @@ public class UI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(candidatoPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(postularButton)
                         .addGap(18, 18, 18)
                         .addComponent(verPostuladosButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -150,7 +151,7 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(candidatoPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(postularButton)
                     .addComponent(verPostuladosButton))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -330,6 +331,7 @@ public class UI extends javax.swing.JFrame {
                 }
             }
             verRegistroButton.setEnabled(true);
+            postularButton.setEnabled(true);
         } catch (Exception ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -338,35 +340,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_ConvocarButtonActionPerformed
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            Operacion op = new Operacion("postular");
-            String[] params = ((String)(candidatoPicker.getSelectedItem())).split(" - ");
-            Person aux = cu.getPerson(params[0], params[2]);
-            System.out.println(aux.toString());
-            System.out.println(eleccion.toString2());
-            System.out.println(op.toString());
-            if(aux != null && loadCLIPS()){
-                e.load("logic.clp");
-                e.assertString(aux.toString());
-                e.assertString(eleccion.toString2());
-                e.assertString(op.toString());
-                e.run();
-                //DIAGNOSTICO
-                MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
-                List hec = P.multifieldValue();
-                if(hec.isEmpty()){
-                    JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName() + " puede ser candidato", "ERROR", JOptionPane.OK_OPTION);
-                    cu.postulados.add(aux);
-                    verPostuladosButton.setEnabled(true);
-                } else {
-                    JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName() + " no puede ser candidato", "ERROR", JOptionPane.OK_OPTION);
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            e.reset();
-        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void verRegistroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verRegistroButtonActionPerformed
@@ -404,6 +378,38 @@ public class UI extends javax.swing.JFrame {
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_salirButtonActionPerformed
+
+    private void postularButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postularButtonActionPerformed
+         try {
+            Operacion op = new Operacion("postular");
+            String[] params = ((String)(candidatoPicker.getSelectedItem())).split(" - ");
+            Person aux = cu.getPerson(params[0], params[2]);
+            System.out.println(aux.toString());
+            System.out.println(eleccion.toString2());
+            System.out.println(op.toString());
+            if(aux != null && loadCLIPS()){
+                e.load("logic.clp");
+                e.assertString(aux.toString());
+                e.assertString(eleccion.toString2());
+                e.assertString(op.toString());
+                e.run();
+                //DIAGNOSTICO
+                MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                List hec = P.multifieldValue();
+                if(hec.isEmpty()){
+                    JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName() + " puede ser candidato", "ERROR", JOptionPane.OK_OPTION);
+                    cu.postulados.add(aux);
+                    verPostuladosButton.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName() + " no puede ser candidato", "ERROR", JOptionPane.OK_OPTION);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            e.reset();
+        }
+    }//GEN-LAST:event_postularButtonActionPerformed
     
     private boolean loadCLIPS(){
         System.loadLibrary("CLIPSJNI");
@@ -456,11 +462,11 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton ConvocarButton;
     private javax.swing.JComboBox candidatoPicker;
     private javax.swing.JComboBox eleccionPicker;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton postularButton;
     private javax.swing.JButton reiniciarButton;
     private javax.swing.JButton salirButton;
     private javax.swing.JButton verPostuladosButton;
