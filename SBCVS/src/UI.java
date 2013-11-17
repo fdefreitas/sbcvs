@@ -78,7 +78,7 @@ public class UI extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Eleccion a Convocar"));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item Eleccion 1", "Item Eleccion 2", "Item Eleccion 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rector", "Vicerrector", "Secretario", "Gobiernol de Nucleos", " " }));
 
         ConvocarButton.setText("Convocar Eleccion");
         ConvocarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -190,6 +190,7 @@ public class UI extends javax.swing.JFrame {
     private void ConvocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvocarButtonActionPerformed
         // TODO add your handling code here:
         try {
+            String eleccion = ((String)(jComboBox1.getSelectedItem()));
             if(loadCLIPS()){
                 e.load("logic.clp");
                 for(Person p : cu.profesores){
