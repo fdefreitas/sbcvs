@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.ComunidadUniversitaria;
+import model.Eleccion;
 import model.Person;
 
 /*
@@ -217,12 +218,14 @@ public class UI extends javax.swing.JFrame {
         try {
             ArrayList<String> result = new ArrayList<>();
             boolean flag = true;
-            String eleccion = ((String)(eleccionPicker.getSelectedItem())).toLowerCase();
+            Eleccion eleccion = (Eleccion) eleccionPicker.getSelectedItem();
             for(Person p : cu.profesores){
                 if (loadCLIPS()) {
                     e.load("logic.clp");
                     e.assertString(p.toString());
-                    e.assertString("(eleccion (tipo \"" + eleccion + "\"))");
+//                    if()
+                    System.out.println("----\ntipo eleccion: \""+eleccion.getTipo().toLowerCase()+"\"\nnucleo eleccion: \""+eleccion.getNucleo().toLowerCase()+"\"\n----\n");
+                    e.assertString("(eleccion (tipo \"" + eleccion.getTipo().toLowerCase() + "\")(nucleo \""+eleccion.getNucleo().toLowerCase()+"\")");
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");

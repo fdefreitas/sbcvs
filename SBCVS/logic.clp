@@ -59,13 +59,13 @@
 ; REGLAS POSTULACIONES 
 ; -------------------------------
 
-; Postulacion Rector
-(defrule ReglaPostulacionRector "Regla Postulacion Rector"
+; Postulacion Rector, Vicerrector y Secretario
+(defrule ReglaPostulacionRector "Regla Postulacion Rector, Vicerrector y Secretario"
 	(eleccion (tipo "rector, vicerrector y secretario"))
 	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
 	(assert(candidato (nombre "Si")))
-	(assert (regla (nombre "r1")))
+	(assert (regla (nombre "r0")))
 	)
 
 ; Consejo Universitario
@@ -74,7 +74,7 @@
 	(persona (tipo "profesor" | "estudiante"))
 	=>
 	(assert(candidato (nombre "Si")))
-	(assert (regla (nombre "r3")))
+	(assert (regla (nombre "r2")))
 	)
 
 ; Junta Superior Universitaria o Tribunal Academico

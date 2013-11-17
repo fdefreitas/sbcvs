@@ -14,7 +14,8 @@ import java.util.logging.Logger;
 public class ComunidadUniversitaria {
     private static ComunidadUniversitaria instance;
     public ArrayList<Person> profesores, estudiantes, egresados, empleados, registro, postulados, comunidad;
-    public ArrayList<String> nucleos, elecciones, eleccionesNucleo;
+    public ArrayList<String> nucleos, eleccionesNucleo;
+    public ArrayList<Eleccion> elecciones;
     
     protected ComunidadUniversitaria() {
         comunidad = new ArrayList<>();
@@ -94,9 +95,11 @@ public class ComunidadUniversitaria {
             System.out.println(empleados.size()+" empleados cargados.");
             
             /* Cargar Elecciones generales */
+            Eleccion election;
             br = new BufferedReader(new FileReader("elecciones.txt"));
             while ((sCurrentLine = br.readLine()) != null) {
-                elecciones.add(sCurrentLine);
+                election = new Eleccion(sCurrentLine, sCurrentLine, "General");
+                elecciones.add(election);
             }
             
             /* Cargar Elecciones por Nucleo */
@@ -109,7 +112,8 @@ public class ComunidadUniversitaria {
             while ((sCurrentLine = br.readLine()) != null) {
                 nucleos.add(sCurrentLine);
                 for(int j = 0 ; j< eleccionesNucleo.size(); j++){
-                    elecciones.add(eleccionesNucleo.get(j)+" de "+sCurrentLine);
+                    election = new Eleccion(eleccionesNucleo.get(j)+" de "+sCurrentLine, eleccionesNucleo.get(j), sCurrentLine);
+                    elecciones.add(election);
                 }
             }
             
