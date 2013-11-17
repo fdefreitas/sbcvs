@@ -221,6 +221,8 @@ public class UI extends javax.swing.JFrame {
         //TODO Checks antes de llamar a clips de si ya estan en el registro para no agregarlos repetidos
         try {
             cu.registro.clear();
+            cu.postulados.clear();
+            verPostuladosButton.setEnabled(false);
             ArrayList<String> result = new ArrayList<>();
             boolean flag = true;
             eleccion = (Eleccion) eleccionPicker.getSelectedItem();
@@ -386,6 +388,8 @@ public class UI extends javax.swing.JFrame {
         cu.loadCU(); 
         verPostuladosButton.setEnabled(false);
         verRegistroButton.setEnabled(false);
+        postularButton.setEnabled(false);
+        eleccion = null;
     }//GEN-LAST:event_reiniciarButtonActionPerformed
 
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
@@ -408,10 +412,15 @@ public class UI extends javax.swing.JFrame {
                 //DIAGNOSTICO
                 MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                 List hec = P.multifieldValue();
+                
                 if(!hec.isEmpty()){
-                    JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName().toUpperCase() + " puede ser candidato", "Postulacion Aceptada", JOptionPane.INFORMATION_MESSAGE);
-                    cu.postulados.add(aux);
-                    verPostuladosButton.setEnabled(true);
+                    if(!cu.postulados.contains(aux)){
+                        JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName().toUpperCase() + " puede ser candidato", "Postulacion Aceptada", JOptionPane.INFORMATION_MESSAGE);
+                        cu.postulados.add(aux);
+                        verPostuladosButton.setEnabled(true);
+                    } else {
+                        JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName().toUpperCase() + " ya es candidato", "Postulacion Aceptada", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName().toUpperCase() + " no puede ser candidato", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
