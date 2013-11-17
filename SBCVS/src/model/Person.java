@@ -8,27 +8,18 @@ import CLIPSJNI.Environment;
 import java.util.Objects;
 
 /**
- *
- * @author Administrador
+ * Clase que contiene todos los atributos de un miembro de la comunidad universitaria como persona
+ * @author Fernando
  */
 public class Person {
     
-    static final String PROFESOR = "profesor";    
-    static final String ESTUDIANTE = "estudiante";
-    static final String EGRESADO = "egresado";
-    static final String EMPLEADO = "empleado";
-    
-    String name;
-    String id;
-    String type;
-    String location;
-    String school;
-    String status;
+    static final String PROFESOR = "profesor", ESTUDIANTE = "estudiante", EGRESADO = "egresado", EMPLEADO = "empleado";
+    private String name, id, type, location, school, status;
 
     public Person(String data) throws Exception {
         String[] fields = data.split(",");
         if(fields.length < 6){
-            throw new Exception("incomplete data exception");
+            throw new Exception("Incomplete Data Exception");
         }
         for(int i =0; i < fields.length; ++i){
             if(i == 0){
@@ -48,6 +39,7 @@ public class Person {
     }
 
     public Person() {
+        
     }
     
     @Override

@@ -56,13 +56,13 @@
 )
 
 (defrule r6
-    (operacion(nombre "postular"))
+    ;(operacion(nombre "postular"))
     (eleccion (nucleo ?n))
     (persona (nucleo ?np & ?n))
     =>
-    (printout t ?np " " ?n " " crlf)
     (assert(candidato (nombre "No")))
     (assert (regla (nombre "r6")))
+	(printout t ?np " " ?n " r6 " crlf)
 )
 
 ; ------------------------------- 
@@ -75,11 +75,12 @@
 
 ; Postulacion Rector, Vicerrector y Secretario
 (defrule ReglaPostulacionRector "Regla Postulacion Rector, Vicerrector y Secretario"
-	(eleccion (tipo "rector, vicerrector y secretario"))
+	(eleccion (tipo "rector, vicerrector y secretario") ?)
 	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
 	(assert(candidato (nombre "Si")))
-	(assert (regla (nombre "r0")))
+	(assert (regla (nombre "ReglaPostulacionRector")))
+	(printout t " ReglaPostulacionRector " crlf)
 	)
 
 ; Consejo Universitario
@@ -88,7 +89,7 @@
 	(persona (tipo "profesor" | "estudiante"))
 	=>
 	(assert(candidato (nombre "Si")))
-	(assert (regla (nombre "r2")))
+	(assert (regla (nombre "ReglaPostulacionCU")))
 	)
 
 ; Junta Superior Universitaria o Tribunal Academico
@@ -97,16 +98,16 @@
 	(persona (tipo "profesor" | "estudiante" | "egresado"))
 	=>
 	(assert(candidato (nombre "Si")))
-	(assert (regla (nombre "r3")))
+	(assert (regla (nombre "ReglaPostulacionJSU/TA")))
 	)
 
 ;Consejo Electoral de {Nucleo}
-(defrule CEN "Consejo Electoral de Nucleo"	
+(defrule ReglaConsejoElectoralNucleo "Consejo Electoral de Nucleo"	
 	(eleccion (tipo "consejo electoral de nucleo") (nucleo ?n))
 	(persona (tipo "profesor" | "estudiante" | "egresado")(nucleo ?np & ?n))
 	=>
 	(assert(candidato (nombre "Si")))
-	(assert (regla (nombre "r4")))
+	(assert (regla (nombre "ReglaConsejoElectoralNucleo")))
 )
 
 ;Consejo de Profesores de {Nucleo}
