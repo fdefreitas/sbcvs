@@ -225,6 +225,10 @@ public class UI extends javax.swing.JFrame {
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
                     System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
+                    for (int i=0;i<hec.size();++i){
+                        FactAddressValue F = (FactAddressValue)hec.get(i);
+                        System.out.println((F.getFactSlot("nombre").toString()));
+                    }
                     if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
                         cu.registro.add(p);
                     }
@@ -238,6 +242,10 @@ public class UI extends javax.swing.JFrame {
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
                     System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
+                    for (int i=0;i<hec.size();++i){
+                        FactAddressValue F = (FactAddressValue)hec.get(i);
+                        System.out.println((F.getFactSlot("nombre").toString()));
+                    }
                     if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
                         cu.registro.add(p);
                     }
@@ -251,6 +259,10 @@ public class UI extends javax.swing.JFrame {
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
                     System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
+                    for (int i=0;i<hec.size();++i){
+                        FactAddressValue F = (FactAddressValue)hec.get(i);
+                        System.out.println((F.getFactSlot("nombre").toString()));
+                    }
                     if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
                         cu.registro.add(p);
                     }
@@ -264,6 +276,10 @@ public class UI extends javax.swing.JFrame {
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
                     System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
+                    for (int i=0;i<hec.size();++i){
+                        FactAddressValue F = (FactAddressValue)hec.get(i);
+                        System.out.println((F.getFactSlot("nombre").toString()));
+                    }
                     if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
                         cu.registro.add(p);
                     }
