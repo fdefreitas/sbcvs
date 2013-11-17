@@ -56,12 +56,12 @@ public class Person {
     }
 
     public Person(String name, String id, String type, String location, String school, String status) {
-        this.name = name.toLowerCase();
-        this.id = id.toLowerCase();
-        this.type = type.toLowerCase();
-        this.location = location.toLowerCase();
-        this.school = school.toLowerCase();
-        this.status = status.toLowerCase();
+        this.name = (name!=null?name.toLowerCase():null);
+        this.id = (id!=null?id.toLowerCase():null);
+        this.type = (type!=null?type.toLowerCase():null);
+        this.location = (location!=null?location.toLowerCase():null);
+        this.school = (school!=null?school.toLowerCase():null);
+        this.status = (status!=null?status.toLowerCase():null);
     }
 
     public String getName() {

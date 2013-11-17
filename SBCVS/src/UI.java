@@ -131,6 +131,11 @@ public class UI extends javax.swing.JFrame {
 
         verPostuladosButton.setText("Ver Candidatos Postulados");
         verPostuladosButton.setEnabled(false);
+        verPostuladosButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verPostuladosButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -195,50 +200,50 @@ public class UI extends javax.swing.JFrame {
     private void ConvocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvocarButtonActionPerformed
         // TODO add your handling code here:
         try {
-//            String eleccion = ((String)(jComboBox1.getSelectedItem()));
-//            if(loadCLIPS()){
-//                e.load("logic.clp");
-//                for(Person p : cu.profesores){
-//                    e.assertString(p.toString());
-//                    e.assertString("(eleccion (tipo "+eleccion+"))");
-//                    e.run();
-//                    //DIAGNOSTICO
-//                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
-//                    List hec = P.multifieldValue();
-//                    //agregar al registro dependiendo de hec
-//                }
-//                
-//                for(Person p : cu.estudiantes){
-//                    e.assertString(p.toString());
-//                    e.assertString("(eleccion (tipo "+eleccion+"))");
-//                    e.run();
-//                    //DIAGNOSTICO
-//                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
-//                    List hec = P.multifieldValue();
-//                    //agregar al registro dependiendo de hec
-//                }
-//                
-//                for(Person p : cu.egresados){
-//                    e.assertString(p.toString());
-//                    e.assertString("(eleccion (tipo "+eleccion+"))");
-//                    e.run();
-//                    //DIAGNOSTICO
-//                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
-//                    List hec = P.multifieldValue();
-//                    //agregar al registro dependiendo de hec
-//                }
-//                
-//                for(Person p : cu.empleados){
-//                    e.assertString(p.toString());
-//                    e.assertString("(eleccion (tipo "+eleccion+"))");
-//                    e.run();
-//                    //DIAGNOSTICO
-//                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
-//                    List hec = P.multifieldValue();
-//                    //agregar al registro dependiendo de hec
-//                }
-//            }
-        //    verPostuladosButton.setEnabled(true);
+            String eleccion = ((String)(jComboBox1.getSelectedItem()));
+            if(loadCLIPS()){
+                e.load("logic.clp");
+                for(Person p : cu.profesores){
+                    e.assertString(p.toString());
+                    e.assertString("(eleccion (tipo "+eleccion+"))");
+                    e.run();
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                    List hec = P.multifieldValue();
+                    //agregar al registro dependiendo de hec
+                }
+                
+                for(Person p : cu.estudiantes){
+                    e.assertString(p.toString());
+                    e.assertString("(eleccion (tipo "+eleccion+"))");
+                    e.run();
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                    List hec = P.multifieldValue();
+                    //agregar al registro dependiendo de hec
+                }
+                
+                for(Person p : cu.egresados){
+                    e.assertString(p.toString());
+                    e.assertString("(eleccion (tipo "+eleccion+"))");
+                    e.run();
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                    List hec = P.multifieldValue();
+                    //agregar al registro dependiendo de hec
+                }
+                
+                for(Person p : cu.empleados){
+                    e.assertString(p.toString());
+                    e.assertString("(eleccion (tipo "+eleccion+"))");
+                    e.run();
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                    List hec = P.multifieldValue();
+                    //agregar al registro dependiendo de hec
+                }
+            }
+            verRegistroButton.setEnabled(true);
         } catch (Exception ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -259,6 +264,8 @@ public class UI extends javax.swing.JFrame {
                 List hec = P.multifieldValue();
                 if(hec.isEmpty()){
                     JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName() + " puede ser candidato", "ERROR", JOptionPane.OK_OPTION);
+                    cu.postulados.add(aux);
+                    verPostuladosButton.setEnabled(true);
                 } else {
                     JOptionPane.showMessageDialog(this,"El " + aux.getType() + " " + aux.getName() + " no puede ser candidato", "ERROR", JOptionPane.OK_OPTION);
                 }
@@ -271,16 +278,38 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void verRegistroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verRegistroButtonActionPerformed
-        // TODO add your handling code here:
         StringBuilder list = new StringBuilder();
-        for(Person p : cu.profesores){
-            list.append(p.getId());
-            list.append(p.getName());
-            list.append(p.getType());
-            list.append("\n");
+        if(!cu.registro.isEmpty()) {
+            list.append("CI \t Nombre \t Tipo\n");
+            for (Person p : cu.registro) {
+                list.append(p.getId());
+                list.append(" \t");
+                list.append(p.getName());
+                list.append(" \t");
+                list.append(p.getType());
+                list.append("\n");
+            }
         }
         JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay nadie habilitado para votar", "Alerta", JOptionPane.OK_OPTION);
+        list.delete(0, list.length());
     }//GEN-LAST:event_verRegistroButtonActionPerformed
+
+    private void verPostuladosButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPostuladosButtonActionPerformed
+        StringBuilder list = new StringBuilder();
+        if(!cu.postulados.isEmpty()) {
+            list.append("CI \t Nombre \t Tipo\n");
+            for (Person p : cu.postulados) {
+                list.append(p.getId());
+                list.append(" \t");
+                list.append(p.getName());
+                list.append(" \t");
+                list.append(p.getType());
+                list.append("\n");
+            }
+        }
+        JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay candidatos postulados", "Alerta", JOptionPane.OK_OPTION);
+        list.delete(0, list.length());
+    }//GEN-LAST:event_verPostuladosButtonActionPerformed
     
     private boolean loadCLIPS(){
         System.loadLibrary("CLIPSJNI");
