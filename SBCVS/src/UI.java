@@ -225,17 +225,13 @@ public class UI extends javax.swing.JFrame {
                 if (loadCLIPS()) {
                     e.load("logic.clp");
                     e.assertString(p.toString());
-                    System.out.println(eleccion.toString2());
                     e.assertString(eleccion.toString2());
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
-                    System.out.println(p.toString() + " " + hec.size());
-
                     for (int i = 0; i < hec.size(); ++i) {
                         FactAddressValue F = (FactAddressValue) hec.get(i);
-                        System.out.println((F.getFactSlot("nombre").toString()));
                         result.add((F.getFactSlot("nombre").toString()));
                     }
                     if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
@@ -264,7 +260,6 @@ public class UI extends javax.swing.JFrame {
 //                    System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
                     for (int i = 0; i < hec.size(); ++i) {
                         FactAddressValue F = (FactAddressValue) hec.get(i);
-                        System.out.println((F.getFactSlot("nombre").toString()));
                         result.add((F.getFactSlot("nombre").toString()));
                     }
                     if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
@@ -290,10 +285,8 @@ public class UI extends javax.swing.JFrame {
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
-//                    System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
                     for (int i = 0; i < hec.size(); ++i) {
                         FactAddressValue F = (FactAddressValue) hec.get(i);
-                        System.out.println((F.getFactSlot("nombre").toString()));
                         result.add((F.getFactSlot("nombre").toString()));
                     }
                     if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
@@ -319,10 +312,8 @@ public class UI extends javax.swing.JFrame {
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
-                    System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
                     for (int i = 0; i < hec.size(); ++i) {
                         FactAddressValue F = (FactAddressValue) hec.get(i);
-                        System.out.println((F.getFactSlot("nombre").toString()));
                         result.add((F.getFactSlot("nombre").toString()));
                     }
                     if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
@@ -353,11 +344,12 @@ public class UI extends javax.swing.JFrame {
             Person aux = cu.getPerson(params[0], params[2]);
             System.out.println(aux.toString());
             System.out.println(eleccion.toString2());
+            System.out.println(op.toString());
             if(aux != null && loadCLIPS()){
                 e.load("logic.clp");
                 e.assertString(aux.toString());
                 e.assertString(eleccion.toString2());
-    //            e.assertString(op.toString());
+                e.assertString(op.toString());
                 e.run();
                 //DIAGNOSTICO
                 MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
