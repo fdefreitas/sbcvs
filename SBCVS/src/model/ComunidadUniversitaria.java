@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 
 /**
- *
+ * Clase que contiene toda la información de la comunidad
  * @author fernando
  */
 public class ComunidadUniversitaria {
@@ -17,6 +17,9 @@ public class ComunidadUniversitaria {
     public ArrayList<String> nucleos, eleccionesNucleo;
     public ArrayList<Eleccion> elecciones;
     
+    /**
+     * Constructor de ComunidadUniversitaria
+     */
     protected ComunidadUniversitaria() {
         comunidad = new ArrayList<>();
         profesores = new ArrayList<>();
@@ -29,6 +32,11 @@ public class ComunidadUniversitaria {
         elecciones = new ArrayList<>();
         eleccionesNucleo = new ArrayList<>();
    }
+    
+   /**
+    * Retorna la instancia del singleton de la clase <code>ComunidadUniversitaria</code>
+    * @return singleton de ComunidadUniversitaria
+    */
    public static ComunidadUniversitaria getInstance() {
       if(instance == null) {
          instance = new ComunidadUniversitaria();
@@ -36,6 +44,9 @@ public class ComunidadUniversitaria {
       return instance;
    }
    
+   /**
+    * Limpia todas las instancias
+    */
    public void clearInstance(){
        profesores.clear();
        estudiantes.clear();
@@ -50,6 +61,12 @@ public class ComunidadUniversitaria {
        instance = null;
    }
    
+   /**
+    * Funcion que obtiene la persona con el id y tipo especificado. Retorna la Persona encontrada o <code>null</code>
+    * @param id id de la persona
+    * @param type tipo de la persona
+    * @return persona especificada
+    */
    public Person getPerson(String id, String type){
         Object obj = new Person(null, id, type, null, null, null);
         if(type.equalsIgnoreCase(Person.PROFESOR)){
@@ -68,6 +85,9 @@ public class ComunidadUniversitaria {
         return null;
    }
    
+    /**
+     * Procedimiento que carga los .txt con información de nucleos, elecciones y miembros de la comunidad universitaria
+     */
     public void loadCU(){
         BufferedReader br = null;
         try {
@@ -112,6 +132,7 @@ public class ComunidadUniversitaria {
             while ((sCurrentLine = br.readLine()) != null) {
                 nucleos.add(sCurrentLine);
                 for(int j = 0 ; j< eleccionesNucleo.size(); j++){
+                    /* Agregar Elecciones de Nucleo a ArrayList de Elecciones */
                     election = new Eleccion(eleccionesNucleo.get(j)+" de "+sCurrentLine, eleccionesNucleo.get(j), sCurrentLine);
                     elecciones.add(election);
                 }
