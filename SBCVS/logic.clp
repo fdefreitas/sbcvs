@@ -78,7 +78,7 @@
 	)
 
 ; Junta Superior Universitaria o Tribunal Academico
-(defrule ReglaPostulacionCU "JSU o TA"
+(defrule ReglaPostulacionJSUTA "JSU o TA"
 	(eleccion (tipo "junta superior universitaria" | "tribunal academico"))
 	(persona (tipo "profesor" | "estudiante" | "egresado"))
 	=>
@@ -87,7 +87,7 @@
 	)
 
 ;Consejo Electoral de {Nucleo}
-(defrule r4 "Consejo Electoral de Nucleo"	
+(defrule CEN "Consejo Electoral de Nucleo"	
 	(eleccion (tipo "consejo electoral de nucleo") (nucleo ?n))
 	(persona (tipo "profesor" | "estudiante" | "egresado")(nucleo ?np & ?n))
 	=>
@@ -96,7 +96,7 @@
 )
 
 ;Consejo de Profesores de {Nucleo}
-(defrule r4 "Consejo de Profesores de Nucleo"	
+(defrule CPN "Consejo de Profesores de Nucleo"	
 	(eleccion (tipo "consejo profesores de nucleo") (nucleo ?n))
 	(persona (tipo "profesor")(nucleo ?np & ?n))
 	=>
