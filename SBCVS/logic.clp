@@ -72,18 +72,10 @@
 	(assert (regla (nombre "r3")))
 )
 
-;Consejo Electoral de {Nucleo}
-(defrule r4 "Consejo Electoral de Nucleo"	
-	(or
-	 (and
-		(eleccion (tipo "consejo electoral") (nucleo ?n))
-		(persona (tipo "estudiante")(status "irregular")(nucleo ?np & ?n))
-	 )
-	 (and
-		(eleccion (tipo "consejo electoral") (nucleo ?n))
-		(persona (tipo ~"estudiante")(nucleo ?np & ?n))
-	 )
-	)
+;Decano de {Nucleo}
+(defrule r4 "Decano de Nucleo"	
+	(eleccion (tipo "decano") (nucleo ?n))
+	(persona (tipo "profesor")(nucleo ?np & ?n))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "r4")))
