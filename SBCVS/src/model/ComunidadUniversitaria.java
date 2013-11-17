@@ -71,6 +71,7 @@ public class ComunidadUniversitaria {
         BufferedReader br = null;
         try {
             String sCurrentLine, personType;
+            /* Cargar personas de la Comunidad Universitaria */
             br = new BufferedReader(new FileReader("comunity.txt"));
             while ((sCurrentLine = br.readLine()) != null) {
                 Person p = new Person(sCurrentLine);
@@ -92,13 +93,13 @@ public class ComunidadUniversitaria {
             System.out.println(egresados.size()+" egresados cargados.");
             System.out.println(empleados.size()+" empleados cargados.");
             
-            /*Cargar Elecciones generales*/
+            /* Cargar Elecciones generales */
             br = new BufferedReader(new FileReader("elecciones.txt"));
             while ((sCurrentLine = br.readLine()) != null) {
                 elecciones.add(sCurrentLine);
             }
             
-            /*Cargar Elecciones por Nucleo*/
+            /* Cargar Elecciones por Nucleo */
             br = new BufferedReader(new FileReader("elecciones_nucleo.txt"));
             while ((sCurrentLine = br.readLine()) != null) {
                 eleccionesNucleo.add(sCurrentLine);

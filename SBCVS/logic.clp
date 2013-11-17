@@ -61,30 +61,12 @@
 
 ; Postulacion Rector
 (defrule ReglaPostulacionRector "Regla Postulacion Rector"
-	(eleccion (tipo "rector"))
+	(eleccion (tipo "rector, vicerrector y secretario"))
 	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "r1")))
 	)
-
-; Postulacion Vicerrector
-(defrule ReglaPostulacionVicerrector "Regla Postulacion Vicerrector"
-	(eleccion (tipo "vicerrector"))
-	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
-	=>
-	(assert(candidato (nombre "Si")))
-	(assert (regla (nombre "r2")))
-)
-
-;Postulacion Secretario
-(defrule ReglaPostulacionSecretario "Regla Postulacion Secretario"
-	(eleccion (tipo "secretario"))
-	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
-	=>
-	(assert(candidato (nombre "Si")))
-	(assert (regla (nombre "r3")))
-)
 
 ;Decano de {Nucleo}
 (defrule r4 "Decano de Nucleo"	

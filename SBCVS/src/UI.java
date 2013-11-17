@@ -308,12 +308,13 @@ public class UI extends javax.swing.JFrame {
         if(!cu.registro.isEmpty()) {
             list.append("CI \t Nombre \t Tipo\n");
             for (Person p : cu.registro) {
-                list.append(p.getId());
-                list.append(" \t");
-                list.append(p.getName());
-                list.append(" \t");
-                list.append(p.getType());
-                list.append("\n");
+//                list.append(p.getId().toUpperCase()+" \t");
+//                list.append(" \t");
+//                list.append(p.getName());
+//                list.append(" \t");
+//                list.append(p.getType());
+//                list.append("\n");
+                list.append(String.format("%-12s %-32s %-12s\n",p.getId(), p.getName(), p.getType()));
             }
         }
         JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay nadie habilitado para votar", "Alerta", JOptionPane.OK_OPTION);
