@@ -214,7 +214,7 @@ public class UI extends javax.swing.JFrame {
     private void ConvocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvocarButtonActionPerformed
         // TODO add your handling code here:
         try {
-            String eleccion = ((String)(eleccionPicker.getSelectedItem()));
+            String eleccion = ((String)(eleccionPicker.getSelectedItem())).toLowerCase();
             if(loadCLIPS()){
                 e.load("logic.clp");
                 for(Person p : cu.profesores){
@@ -225,20 +225,7 @@ public class UI extends javax.swing.JFrame {
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
                     System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
-                    if(true){//agregar al registro dependiendo de hec
-                        cu.registro.add(p);
-                    }
-                }
-                
-                for(Person p : cu.estudiantes){
-                    e.assertString(p.toString());
-                    e.assertString("(eleccion (tipo \""+eleccion+"\"))");
-                    e.run();
-                    //DIAGNOSTICO
-                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
-                    List hec = P.multifieldValue();
-                    System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
-                    if(true){//agregar al registro dependiendo de hec
+                    if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
                         cu.registro.add(p);
                     }
                 }
@@ -251,7 +238,7 @@ public class UI extends javax.swing.JFrame {
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
                     System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
-                    if(true){//agregar al registro dependiendo de hec
+                    if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
                         cu.registro.add(p);
                     }
                 }
@@ -264,7 +251,20 @@ public class UI extends javax.swing.JFrame {
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
                     System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
-                    if(true){//agregar al registro dependiendo de hec
+                    if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
+                        cu.registro.add(p);
+                    }
+                }
+                
+                for(Person p : cu.estudiantes){
+                    e.assertString(p.toString());
+                    e.assertString("(eleccion (tipo \""+eleccion+"\"))");
+                    e.run();
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                    List hec = P.multifieldValue();
+                    System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
+                    if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
                         cu.registro.add(p);
                     }
                 }
