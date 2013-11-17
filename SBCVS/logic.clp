@@ -75,7 +75,7 @@
 
 ; Postulacion Rector, Vicerrector y Secretario
 (defrule ReglaPostulacionRector "Regla Postulacion Rector, Vicerrector y Secretario"
-	(eleccion (tipo "rector, vicerrector y secretario") ?)
+	(eleccion (tipo "rector, vicerrector y secretario") (nucleo ?n))
 	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
 	(assert(candidato (nombre "Si")))
@@ -84,7 +84,7 @@
 	)
 
 ; Consejo Universitario
-(defrule ReglaPostulacionCU "CU"
+(defrule ReglaPostulacionConsejoUniversitario "ConsejoUniversitario"
 	(eleccion (tipo "consejo universitario"))
 	(persona (tipo "profesor" | "estudiante"))
 	=>
