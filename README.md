@@ -23,12 +23,14 @@ Registros Electorales:
 
 Elecciones:
 
-- Junta Superior Universitaria (Profesores, Estudiantes, Egresados)
-- Consejo Universitario (Profesores, Estudiantes)
-- Rector, Vicerrector y Secretario(Profesores: Asociado en adelante)
-- Tribunal Academico (Profesores, Estudiantes, Egresados)
-- Consejo Electoral de {Nucleo} (Profesores, Estudiantes, Egresados)
-- Consejo de Profesores de {Nucleo}	(Profesores)
+- [CHECK]Junta Superior Universitaria (Postularse/Votar: Profesores, Estudiantes, Egresados)
+- [CHECK] Consejo Universitario (Postularse/Votar: Profesores, Estudiantes)
+- [CHECK] Rector, Vicerrector y Secretario(
+	Postularse: Profesores, Asociado en adelante
+	Votar: Profesores, Estudiantes, Egresados)
+- [CHECK] Tribunal Academico (Postularse/Votar: Profesores, Estudiantes, Egresados)
+- [CHECK] Consejo Electoral de {Nucleo} (Postularse/Votar (De Nucleo): Profesores, Estudiantes, Egresados)
+- [CHECK] Consejo de Profesores de {Nucleo}	(Postularse/Votar (De Nucleo): Profesores)
 
 Escalafones Profesores: instructor > asistente > asociado > agregado > titular
 

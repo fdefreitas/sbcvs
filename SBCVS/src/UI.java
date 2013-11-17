@@ -218,6 +218,7 @@ public class UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void convocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convocarButtonActionPerformed
+        //TODO Checks antes de llamar a clips de si ya estan en el registro para no agregarlos repetidos
         try {
             cu.registro.clear();
             ArrayList<String> result = new ArrayList<>();
@@ -353,7 +354,7 @@ public class UI extends javax.swing.JFrame {
     private void verRegistroButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verRegistroButtonActionPerformed
         StringBuilder list = new StringBuilder();
         if(!cu.registro.isEmpty()) {
-            System.out.println("Lista Postulados:\n"+"Cant: "+cu.registro.size());
+            System.out.println("Registro:\n"+"Cant: "+cu.registro.size());
             list.append(String.format("%-32s %-48s %s\n","CI", "Nombre", "Tipo"));
             for (Person p : cu.registro) {
                 list.append(String.format("%-16s %-48s %s\n",p.getId().toUpperCase(), p.getName().toUpperCase(), p.getType().toUpperCase()));
@@ -375,7 +376,7 @@ public class UI extends javax.swing.JFrame {
                 System.out.println(String.format("%-16s %-48s %s\n",p.getId().toUpperCase(), p.getName().toUpperCase(), p.getType().toUpperCase()));
             }
         }
-        JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay candidatos postulados", "Alerta", JOptionPane.OK_OPTION);
+        JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay candidatos postulados", "Alerta", JOptionPane.DEFAULT_OPTION);
         list.delete(0, list.length());
     }//GEN-LAST:event_verPostuladosButtonActionPerformed
 
@@ -392,15 +393,14 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_salirButtonActionPerformed
 
     private void postularButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postularButtonActionPerformed
-         try {
-            Operacion op = new Operacion("postular");
+        //TODO Checks antes de llamar a CLIPS para ver si ya estan en los postulados 
+        try {
             String[] params = ((String)(candidatoPicker.getSelectedItem())).split(" - ");
             Person aux = cu.getPerson(params[0], params[2]);
             if(aux != null && loadCLIPS()){
                 e.load("logic.clp");
                 e.assertString(aux.toString());
                 e.assertString(eleccion.toSlotTipoNucleo());
-                e.assertString(op.toString());
                 e.assertString(operacionPostulacion);
                 System.out.println("\nEnviando:\n\t"+aux.toString()+"\n\t"+eleccion.toSlotTipoNucleo()+"\n\t"+operacionPostulacion+"\nRecibiendo:");
                 e.run();
