@@ -24,7 +24,7 @@
 
 (deftemplate eleccion
 	(slot tipo (type STRING))
-	(slot nucleo (type STRING))
+	;(slot nucleo (type STRING))
 )
 
 (deftemplate regla
@@ -57,8 +57,8 @@
 
 (defrule r6
     ;(operacion(nombre "postular"))
-    (eleccion (nucleo ?n))
-    (persona (nucleo ?np & ?n))
+    ;(eleccion (nucleo ?n))
+    ;(persona (nucleo ?np & ?n))
     =>
     (assert(candidato (nombre "No")))
     (assert (regla (nombre "r6")))
@@ -75,7 +75,7 @@
 
 ; Postulacion Rector, Vicerrector y Secretario
 (defrule ReglaPostulacionRector "Regla Postulacion Rector, Vicerrector y Secretario"
-	(eleccion (tipo "rector, vicerrector y secretario") (nucleo ?n))
+	(eleccion (tipo "rector, vicerrector y secretario"))
 	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
 	(assert(candidato (nombre "Si")))
@@ -103,8 +103,8 @@
 
 ;Consejo Electoral de {Nucleo}
 (defrule ReglaConsejoElectoralNucleo "Consejo Electoral de Nucleo"	
-	(eleccion (tipo "consejo electoral de nucleo") (nucleo ?n))
-	(persona (tipo "profesor" | "estudiante" | "egresado")(nucleo ?np & ?n))
+	(eleccion (tipo "consejo electoral de nucleo"))
+	(persona (tipo "profesor" | "estudiante" | "egresado"))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "ReglaConsejoElectoralNucleo")))
@@ -112,8 +112,8 @@
 
 ;Consejo de Profesores de {Nucleo}
 (defrule CPN "Consejo de Profesores de Nucleo"	
-	(eleccion (tipo "consejo de profesores de nucleo") (nucleo ?n))
-	(persona (tipo "profesor")(nucleo ?np & ?n))
+	(eleccion (tipo "consejo de profesores de nucleo"))
+	(persona (tipo "profesor"))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "r5")))

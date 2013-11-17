@@ -92,7 +92,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="eleccionPicker" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="ConvocarButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="convocarButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="verRegistroButton" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -107,7 +107,7 @@
                   <Component id="eleccionPicker" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ConvocarButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="convocarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="verRegistroButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
@@ -127,12 +127,12 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="ConvocarButton">
+        <Component class="javax.swing.JButton" name="convocarButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Convocar Eleccion"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ConvocarButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="convocarButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="verRegistroButton">

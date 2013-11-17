@@ -51,7 +51,7 @@ public class UI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         eleccionPicker = new javax.swing.JComboBox();
-        ConvocarButton = new javax.swing.JButton();
+        convocarButton = new javax.swing.JButton();
         verRegistroButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         candidatoPicker = new javax.swing.JComboBox();
@@ -70,10 +70,10 @@ public class UI extends javax.swing.JFrame {
 
         eleccionPicker.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rector", "Vicerrector", "Secretario" }));
 
-        ConvocarButton.setText("Convocar Eleccion");
-        ConvocarButton.addActionListener(new java.awt.event.ActionListener() {
+        convocarButton.setText("Convocar Eleccion");
+        convocarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConvocarButtonActionPerformed(evt);
+                convocarButtonActionPerformed(evt);
             }
         });
 
@@ -94,7 +94,7 @@ public class UI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(eleccionPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ConvocarButton)
+                        .addComponent(convocarButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(verRegistroButton)))
                 .addContainerGap(82, Short.MAX_VALUE))
@@ -105,7 +105,7 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(eleccionPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ConvocarButton)
+                    .addComponent(convocarButton)
                     .addComponent(verRegistroButton))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -215,8 +215,7 @@ public class UI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ConvocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvocarButtonActionPerformed
-        // TODO add your handling code here:
+    private void convocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convocarButtonActionPerformed
         try {
             cu.registro.clear();
             ArrayList<String> result = new ArrayList<>();
@@ -337,7 +336,7 @@ public class UI extends javax.swing.JFrame {
         } finally {
             e.reset();
         }
-    }//GEN-LAST:event_ConvocarButtonActionPerformed
+    }//GEN-LAST:event_convocarButtonActionPerformed
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
@@ -459,8 +458,8 @@ public class UI extends javax.swing.JFrame {
     static Environment e;
     Eleccion eleccion;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ConvocarButton;
     private javax.swing.JComboBox candidatoPicker;
+    private javax.swing.JButton convocarButton;
     private javax.swing.JComboBox eleccionPicker;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
