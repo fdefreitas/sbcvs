@@ -189,8 +189,22 @@ public class UI extends javax.swing.JFrame {
 
     private void ConvocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvocarButtonActionPerformed
         // TODO add your handling code here:
-        if(loadCLIPS()){
-            
+        try {
+            if(loadCLIPS()){
+                e.load("logic.clp");
+                for(Person p : cu.profesores){
+                    e.assertString(p.toString());
+                    e.run();
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                    List hec = P.multifieldValue();
+                    //agregar al registro dependiendo de hec
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            e.reset();
         }
     }//GEN-LAST:event_ConvocarButtonActionPerformed
     
@@ -198,7 +212,7 @@ public class UI extends javax.swing.JFrame {
         try {
             String[] params = ((String)(jComboBox2.getSelectedItem())).split(" - ");
             Person aux = cu.getPerson(params[0], params[2]);
-            if(loadCLIPS()){
+            if(aux != null && loadCLIPS()){
                 e.load("logic.clp");
                 e.assertString(aux.toString());
                 e.run();
