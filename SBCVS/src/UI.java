@@ -62,6 +62,7 @@ public class UI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         salirButton = new javax.swing.JButton();
         reiniciarButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,6 +176,13 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Ver Comunidad Universitaria");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,7 +196,8 @@ public class UI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(reiniciarButton)
@@ -200,9 +209,12 @@ public class UI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2))
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -431,6 +443,21 @@ public class UI extends javax.swing.JFrame {
             e.reset();
         }
     }//GEN-LAST:event_postularButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        StringBuilder list = new StringBuilder();
+        if(!cu.comunidad.isEmpty()) {
+            list.append("Cant: "+cu.comunidad.size());
+            System.out.println("Lista Postulados:\n"+"Cant: "+cu.comunidad.size());
+            list.append(String.format("%-32s %-48s %-54s %s\n","CI", "Nombre", "Tipo", "Nucleo"));
+            for (Person p : cu.comunidad) {
+                list.append(String.format("%-16s %-32s %-48s %s\n",p.getId().toUpperCase(), p.getName().toUpperCase(), p.getType().toUpperCase(), p.getLocation().toUpperCase()));
+                System.out.println(String.format("%-16s %-32s %-48s %s\n",p.getId().toUpperCase(), p.getName().toUpperCase(), p.getType().toUpperCase(), p.getLocation().toUpperCase()));
+            }
+        }
+        JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay candidatos postulados", "Alerta", JOptionPane.DEFAULT_OPTION);
+        list.delete(0, list.length());
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * Funcion que hace la carga de las librerias de CLIPS
@@ -487,6 +514,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JComboBox candidatoPicker;
     private javax.swing.JButton convocarButton;
     private javax.swing.JComboBox eleccionPicker;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
