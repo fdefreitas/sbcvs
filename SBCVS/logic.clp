@@ -97,7 +97,7 @@
 
 ;Consejo de Profesores de {Nucleo}
 (defrule CPN "Consejo de Profesores de Nucleo"	
-	(eleccion (tipo "consejo profesores de nucleo") (nucleo ?n))
+	(eleccion (tipo "consejo de profesores de nucleo") (nucleo ?n))
 	(persona (tipo "profesor")(nucleo ?np & ?n))
 	=>
 	(assert(candidato (nombre "Si")))

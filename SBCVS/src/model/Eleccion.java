@@ -27,6 +27,10 @@ public class Eleccion {
     public String toString(){
         return this.nombre;
     }
+    
+    public String toString2(){
+        return "(eleccion (tipo \"" + tipo.toLowerCase() + "\") (nucleo \"" + nucleo.toLowerCase() + "\"))";
+    }
     /**
      * @return the nombre
      */

@@ -224,14 +224,13 @@ public class UI extends javax.swing.JFrame {
                 if (loadCLIPS()) {
                     e.load("logic.clp");
                     e.assertString(p.toString());
-//                    if()
-                    System.out.println("----\ntipo eleccion: \""+eleccion.getTipo().toLowerCase()+"\"\nnucleo eleccion: \""+eleccion.getNucleo().toLowerCase()+"\"\n----\n");
-                    e.assertString("(eleccion (tipo \"" + eleccion.getTipo().toLowerCase() + "\")(nucleo \""+eleccion.getNucleo().toLowerCase()+"\")");
+                    System.out.println(eleccion.toString2());
+                    e.assertString(eleccion.toString2());
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
-                    System.out.println(p.getName() + " " + p.getType() + " " + p.getStatus() + " " + hec.size());
+                    System.out.println(p.toString() + " " + hec.size());
 
                     for (int i = 0; i < hec.size(); ++i) {
                         FactAddressValue F = (FactAddressValue) hec.get(i);
@@ -256,7 +255,7 @@ public class UI extends javax.swing.JFrame {
                 if (loadCLIPS()) {
                     e.load("logic.clp");
                     e.assertString(p.toString());
-                    e.assertString("(eleccion (tipo \"" + eleccion + "\"))");
+                    e.assertString(eleccion.toString2());
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
@@ -285,7 +284,7 @@ public class UI extends javax.swing.JFrame {
                 if (loadCLIPS()) {
                     e.load("logic.clp");
                     e.assertString(p.toString());
-                    e.assertString("(eleccion (tipo \"" + eleccion + "\"))");
+                    e.assertString(eleccion.toString2());
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
@@ -314,7 +313,7 @@ public class UI extends javax.swing.JFrame {
                 if (loadCLIPS()) {
                     e.load("logic.clp");
                     e.assertString(p.toString());
-                    e.assertString("(eleccion (tipo \"" + eleccion + "\"))");
+                    e.assertString(eleccion.toString2());
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
