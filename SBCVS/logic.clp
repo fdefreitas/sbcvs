@@ -19,8 +19,8 @@
 )
 
 (deftemplate eleccion
-(slot tipo (type STRING))
-(slot nucleo (type STRING))
+	(slot tipo (type STRING))
+	(slot nucleo (type STRING))
 )
 
 (deftemplate regla

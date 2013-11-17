@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 public class ComunidadUniversitaria {
     private static ComunidadUniversitaria instance;
     public ArrayList<Person> profesores, estudiantes, egresados, empleados, registro, postulados, comunidad;
+    public ArrayList<String> nucleos, elecciones, eleccionesNucleo;
     
     protected ComunidadUniversitaria() {
         comunidad = new ArrayList<>();
@@ -23,6 +24,12 @@ public class ComunidadUniversitaria {
         empleados = new ArrayList<>();
         registro = new ArrayList<>();
         postulados = new ArrayList<>();
+        nucleos = new ArrayList<>();
+        elecciones = new ArrayList<>();
+        elecciones.add("Rector");
+        elecciones.add("Vicerrector"); 
+        elecciones.add("Secretario");
+        eleccionesNucleo = new ArrayList<>();
    }
    public static ComunidadUniversitaria getInstance() {
       if(instance == null) {
@@ -79,10 +86,25 @@ public class ComunidadUniversitaria {
                 comunidad.add(p);
             }
 
-            System.out.println(profesores.size()+" profesores cargadas.");
-            System.out.println(estudiantes.size()+" estudiantes cargadas.");
-            System.out.println(egresados.size()+" egresados cargadas.");
-            System.out.println(empleados.size()+" empleados cargadas.");
+            System.out.println(profesores.size()+" profesores cargados.");
+            System.out.println(estudiantes.size()+" estudiantes cargados.");
+            System.out.println(egresados.size()+" egresados cargados.");
+            System.out.println(empleados.size()+" empleados cargados.");
+            
+            /*Cargar Elecciones por Nucleo*/
+            br = new BufferedReader(new FileReader("elecciones_nucleo.txt"));
+            while ((sCurrentLine = br.readLine()) != null) {
+                eleccionesNucleo.add(sCurrentLine);
+            }
+            /* Cargar Nucleos */
+            br = new BufferedReader(new FileReader("nucleos.txt"));
+            while ((sCurrentLine = br.readLine()) != null) {
+                nucleos.add(sCurrentLine);
+                for(int j = 0 ; j< eleccionesNucleo.size(); j++){
+                    elecciones.add(eleccionesNucleo.get(j)+" de "+sCurrentLine);
+                }
+            }
+            
         } catch (Exception ex) {
             Logger.getLogger(ComunidadUniversitaria.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

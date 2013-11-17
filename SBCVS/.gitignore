@@ -7,11 +7,14 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+# Netbeans files
+*.mf
+
 # Class Files #
 *.class
+*.form
 
 # Package Files #
 *.jar
 *.war
 *.ear
-*.form

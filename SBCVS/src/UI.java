@@ -1,8 +1,5 @@
 
 import CLIPSJNI.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,24 +28,12 @@ public class UI extends javax.swing.JFrame {
         cu.loadCU();
         String[] persons = new String[cu.profesores.size()+cu.estudiantes.size()+cu.egresados.size()+cu.empleados.size()];
         int i = 0;
-        for(Person p : cu.profesores){
+        for(Person p : cu.comunidad){
             persons[i] = p.getId() + " - " + p.getName() + " - " + p.getType();
             ++i;
         }
-        for(Person p : cu.estudiantes){
-            persons[i] = p.getId() + " - " + p.getName() + " - " + p.getType();
-            ++i;
-        }
-        for(Person p : cu.egresados){
-            persons[i] = p.getId() + " - " + p.getName() + " - " + p.getType();
-            ++i;
-        }
-        for(Person p : cu.empleados){
-            persons[i] = p.getId() + " - " + p.getName() + " - " + p.getType();
-            ++i;
-        }
-                
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(persons));
+        eleccionPicker.setModel(new javax.swing.DefaultComboBoxModel(cu.elecciones.toArray()));
+        candidatoPicker.setModel(new javax.swing.DefaultComboBoxModel(persons));
     }
 
     /**
@@ -62,11 +47,11 @@ public class UI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
+        eleccionPicker = new javax.swing.JComboBox();
         ConvocarButton = new javax.swing.JButton();
         verRegistroButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox();
+        candidatoPicker = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
         verPostuladosButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -80,7 +65,7 @@ public class UI extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Eleccion a Convocar"));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rector", "Vicerrector", "Secretario", "Gobiernol de Nucleos", " " }));
+        eleccionPicker.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rector", "Vicerrector", "Secretario" }));
 
         ConvocarButton.setText("Convocar Eleccion");
         ConvocarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -103,26 +88,28 @@ public class UI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ConvocarButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(verRegistroButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(eleccionPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ConvocarButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(verRegistroButton)))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(eleccionPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ConvocarButton)
                     .addComponent(verRegistroButton))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Postular Candidato"));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Candidato Apellido 1", "Candidato Apellido 2", "Candidato Apellido 3" }));
+        candidatoPicker.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Candidato Apellido 1", "Candidato Apellido 2", "Candidato Apellido 3" }));
 
         jButton2.setText("Postular");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -145,28 +132,35 @@ public class UI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(verPostuladosButton)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(candidatoPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(verPostuladosButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(candidatoPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2)
                     .addComponent(verPostuladosButton))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Cantarell", 0, 12)); // NOI18N
         jLabel2.setText("De Freitas / Plessmann / López");
 
         salirButton.setText("Salir");
+        salirButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirButtonActionPerformed(evt);
+            }
+        });
 
         reiniciarButton.setText("Reiniciar");
         reiniciarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -206,12 +200,12 @@ public class UI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salirButton)
                     .addComponent(reiniciarButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -220,7 +214,7 @@ public class UI extends javax.swing.JFrame {
     private void ConvocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvocarButtonActionPerformed
         // TODO add your handling code here:
         try {
-            String eleccion = ((String)(jComboBox1.getSelectedItem()));
+            String eleccion = ((String)(eleccionPicker.getSelectedItem()));
             if(loadCLIPS()){
                 e.load("logic.clp");
                 for(Person p : cu.profesores){
@@ -273,7 +267,7 @@ public class UI extends javax.swing.JFrame {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            String[] params = ((String)(jComboBox2.getSelectedItem())).split(" - ");
+            String[] params = ((String)(candidatoPicker.getSelectedItem())).split(" - ");
             Person aux = cu.getPerson(params[0], params[2]);
             if(aux != null && loadCLIPS()){
                 e.load("logic.clp");
@@ -338,6 +332,10 @@ public class UI extends javax.swing.JFrame {
         verPostuladosButton.setEnabled(false);
         verRegistroButton.setEnabled(false);
     }//GEN-LAST:event_reiniciarButtonActionPerformed
+
+    private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_salirButtonActionPerformed
     
     private boolean loadCLIPS(){
         System.loadLibrary("CLIPSJNI");
@@ -349,6 +347,7 @@ public class UI extends javax.swing.JFrame {
         }
         return true;
     }
+    
     /**
      * @param args the command line arguments
      */
@@ -386,9 +385,9 @@ public class UI extends javax.swing.JFrame {
     static Environment e;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConvocarButton;
+    private javax.swing.JComboBox candidatoPicker;
+    private javax.swing.JComboBox eleccionPicker;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
