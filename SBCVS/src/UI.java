@@ -195,6 +195,37 @@ public class UI extends javax.swing.JFrame {
                 e.load("logic.clp");
                 for(Person p : cu.profesores){
                     e.assertString(p.toString());
+                    e.assertString("(eleccion (tipo "+eleccion+"))");
+                    e.run();
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                    List hec = P.multifieldValue();
+                    //agregar al registro dependiendo de hec
+                }
+                
+                for(Person p : cu.estudiantes){
+                    e.assertString(p.toString());
+                    e.assertString("(eleccion (tipo "+eleccion+"))");
+                    e.run();
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                    List hec = P.multifieldValue();
+                    //agregar al registro dependiendo de hec
+                }
+                
+                for(Person p : cu.egresados){
+                    e.assertString(p.toString());
+                    e.assertString("(eleccion (tipo "+eleccion+"))");
+                    e.run();
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
+                    List hec = P.multifieldValue();
+                    //agregar al registro dependiendo de hec
+                }
+                
+                for(Person p : cu.empleados){
+                    e.assertString(p.toString());
+                    e.assertString("(eleccion (tipo "+eleccion+"))");
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
