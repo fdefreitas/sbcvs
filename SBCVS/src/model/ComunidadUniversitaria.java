@@ -13,9 +13,10 @@ import java.util.logging.Logger;
  */
 public class ComunidadUniversitaria {
     private static ComunidadUniversitaria instance;
-    public ArrayList<Person> profesores, estudiantes, egresados, empleados, registro, postulados;
+    public ArrayList<Person> profesores, estudiantes, egresados, empleados, registro, postulados, comunidad;
     
     protected ComunidadUniversitaria() {
+        comunidad = new ArrayList<>();
         profesores = new ArrayList<>();
         estudiantes = new ArrayList<>();
         egresados = new ArrayList<>();
@@ -67,14 +68,15 @@ public class ComunidadUniversitaria {
                 Person p = new Person(sCurrentLine);
                 personType = p.getType();
                 if(personType.equalsIgnoreCase(Person.PROFESOR)){
-                    profesores.add(p.clone());
+                    profesores.add(p);
                 }else if(personType.equalsIgnoreCase(Person.ESTUDIANTE)){
-                    estudiantes.add(p.clone());
+                    estudiantes.add(p);
                 }else if(personType.equalsIgnoreCase(Person.EGRESADO)){
-                    egresados.add(p.clone());
+                    egresados.add(p);
                 }else if(personType.equalsIgnoreCase(Person.EMPLEADO)){
-                    empleados.add(p.clone());
+                    empleados.add(p);
                 }
+                comunidad.add(p);
             }
 
             System.out.println(profesores.size()+" profesores cargadas.");
