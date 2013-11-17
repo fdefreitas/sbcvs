@@ -68,13 +68,40 @@
 	(assert (regla (nombre "r1")))
 	)
 
-;Decano de {Nucleo}
-(defrule r4 "Decano de Nucleo"	
-	(eleccion (tipo "decano") (nucleo ?n))
-	(persona (tipo "profesor")(nucleo ?np & ?n))
+; Consejo Universitario
+(defrule ReglaPostulacionCU "CU"
+	(eleccion (tipo "consejo universitario"))
+	(persona (tipo "profesor" | "estudiante"))
+	=>
+	(assert(candidato (nombre "Si")))
+	(assert (regla (nombre "r3")))
+	)
+
+; Junta Superior Universitaria o Tribunal Academico
+(defrule ReglaPostulacionCU "JSU o TA"
+	(eleccion (tipo "junta superior universitaria" | "tribunal academico"))
+	(persona (tipo "profesor" | "estudiante" | "egresado"))
+	=>
+	(assert(candidato (nombre "Si")))
+	(assert (regla (nombre "r3")))
+	)
+
+;Consejo Electoral de {Nucleo}
+(defrule r4 "Consejo Electoral de Nucleo"	
+	(eleccion (tipo "consejo electoral de nucleo") (nucleo ?n))
+	(persona (tipo "profesor" | "estudiante" | "egresado")(nucleo ?np & ?n))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "r4")))
+)
+
+;Consejo de Profesores de {Nucleo}
+(defrule r4 "Consejo de Profesores de Nucleo"	
+	(eleccion (tipo "consejo profesores de nucleo") (nucleo ?n))
+	(persona (tipo "profesor")(nucleo ?np & ?n))
+	=>
+	(assert(candidato (nombre "Si")))
+	(assert (regla (nombre "r5")))
 )
 
 ; ------------------------------- 
