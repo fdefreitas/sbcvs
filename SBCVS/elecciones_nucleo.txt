@@ -1,5 +1,2 @@
-Decano
-Consejo
-Candidato a Tribunal Académico
-Representacion Estudiantil
-Egresados
+Consejo de Nucleo
+Consejo de Profesores de Nucleo

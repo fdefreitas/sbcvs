@@ -26,9 +26,6 @@ public class ComunidadUniversitaria {
         postulados = new ArrayList<>();
         nucleos = new ArrayList<>();
         elecciones = new ArrayList<>();
-        elecciones.add("Rector");
-        elecciones.add("Vicerrector"); 
-        elecciones.add("Secretario");
         eleccionesNucleo = new ArrayList<>();
    }
    public static ComunidadUniversitaria getInstance() {
@@ -94,6 +91,12 @@ public class ComunidadUniversitaria {
             System.out.println(estudiantes.size()+" estudiantes cargados.");
             System.out.println(egresados.size()+" egresados cargados.");
             System.out.println(empleados.size()+" empleados cargados.");
+            
+            /*Cargar Elecciones generales*/
+            br = new BufferedReader(new FileReader("elecciones.txt"));
+            while ((sCurrentLine = br.readLine()) != null) {
+                elecciones.add(sCurrentLine);
+            }
             
             /*Cargar Elecciones por Nucleo*/
             br = new BufferedReader(new FileReader("elecciones_nucleo.txt"));

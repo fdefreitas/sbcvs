@@ -24,13 +24,11 @@ Registros Electorales:
 Elecciones:
 
 - Junta Superior Universitaria (Profesores, Estudiantes, Egresados)
-- Consejo universitario (Profesores, Estudiantes)
-- Rector	(Profesores: Asociado en adelante)
-- Vicerrector	(Profesores: Asociado en adelante)
-- Secretario	(Profesores: Asociado en adelante)
+- Consejo Universitario (Profesores, Estudiantes)
+- Rector, Vicerrector y Secretario(Profesores: Asociado en adelante)
+- Tribunal Academico (Profesores, Estudiantes, Egresados)
 - Consejo Electoral de {Nucleo} (Profesores, Estudiantes, Egresados)
 - Consejo de Profesores de {Nucleo}	(Profesores)
-- Consejo de Profesores de Escuela en {Nucleo}	(Profesores)
 
 Escalafones Profesores: instructor > asistente > asociado > agregado > titular
 
