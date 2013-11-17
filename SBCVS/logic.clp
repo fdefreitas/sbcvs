@@ -40,6 +40,10 @@
 ;Reglas
 ;---
 
+; ------------------------------- 
+; REGLAS REGISTROS 
+; -------------------------------
+
 (defrule r0
 	(persona (tipo "estudiante")(status "irregular"))
 	=>
@@ -47,8 +51,16 @@
 	(assert (regla (nombre "r0")))
 )
 
-;Eleccion Rector
-(defrule r1 "eleccion rector"
+; ------------------------------- 
+; FIN REGLAS REGISTROS
+; -------------------------------
+
+; ------------------------------- 
+; REGLAS POSTULACIONES 
+; -------------------------------
+
+; Postulacion Rector
+(defrule ReglaPostulacionRector "Regla Postulacion Rector"
 	(eleccion (tipo "rector"))
 	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
@@ -56,8 +68,8 @@
 	(assert (regla (nombre "r1")))
 	)
 
-; Eleccion Vicerrector
-(defrule r2 "eleccion vicerrector"
+; Postulacion Vicerrector
+(defrule ReglaPostulacionVicerrector "Regla Postulacion Vicerrector"
 	(eleccion (tipo "vicerrector"))
 	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
@@ -65,8 +77,8 @@
 	(assert (regla (nombre "r2")))
 )
 
-;Eleccion Secretario
-(defrule r3 "eleccion secretario"
+;Postulacion Secretario
+(defrule ReglaPostulacionSecretario "Regla Postulacion Secretario"
 	(eleccion (tipo "secretario"))
 	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
 	=>
@@ -82,6 +94,11 @@
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "r4")))
 )
+
+; ------------------------------- 
+; FIN REGLAS POSTULACIONES 
+; -------------------------------
+
 ;---
 ;Fin Reglas
 ;---
