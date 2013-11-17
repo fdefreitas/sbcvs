@@ -45,6 +45,10 @@ public class ComunidadUniversitaria {
        empleados.clear();
        registro.clear();
        postulados.clear();
+       comunidad.clear();
+       nucleos.clear();
+       elecciones.clear();
+       eleccionesNucleo.clear();
        instance = null;
    }
    
