@@ -3,6 +3,7 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -137,7 +138,11 @@ public class ComunidadUniversitaria {
                     elecciones.add(election);
                 }
             }
-            
+            Collections.sort(comunidad);
+            Collections.sort(profesores);
+            Collections.sort(estudiantes);
+            Collections.sort(egresados);
+            Collections.sort(empleados);
         } catch (Exception ex) {
             Logger.getLogger(ComunidadUniversitaria.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

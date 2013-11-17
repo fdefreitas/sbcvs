@@ -4,14 +4,13 @@
  */
 package model;
 
-import CLIPSJNI.Environment;
 import java.util.Objects;
 
 /**
  * Clase que contiene todos los atributos de un miembro de la comunidad universitaria como persona
  * @author Fernando
  */
-public class Person {
+public class Person implements Comparable<Person>{
     
     static final String PROFESOR = "profesor", ESTUDIANTE = "estudiante", EGRESADO = "egresado", EMPLEADO = "empleado";
     private String name, id, type, location, school, status;
@@ -39,7 +38,12 @@ public class Person {
     }
 
     public Person() {
-        
+        name = new String(); 
+        id  = new String(); 
+        type = new String();
+        location = new String();
+        school = new String(); 
+        status = new String();
     }
     
     @Override
@@ -130,6 +134,35 @@ public class Person {
         hash = 37 * hash + Objects.hashCode(this.id);
     //    hash = 37 * hash + Objects.hashCode(this.type);
         return hash;
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        int actual = Objects.hashCode(this.type);
+        int other = Objects.hashCode(o.getType());
+        if(actual > other){
+            return 1;
+        } else if(actual < other){
+            return -1;
+        } else {
+            actual = Objects.hashCode(this.location);
+            other = Objects.hashCode(o.getLocation());
+            if(actual > other){
+                return -1;
+            } else if(actual < other){
+                return 1;
+            } else {
+                actual = Objects.hashCode(this.id);
+                other = Objects.hashCode(o.getId());
+                if(actual > other){
+                    return -1;
+                } else if(actual < other){
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
     }
 
 }
