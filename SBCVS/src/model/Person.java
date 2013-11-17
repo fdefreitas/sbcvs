@@ -32,17 +32,17 @@ public class Person {
         }
         for(int i =0; i < fields.length; ++i){
             if(i == 0){
-                name = fields[i];
+                name = fields[i].toLowerCase();
             } else if(i == 1){
-                id = fields[i];
+                id = fields[i].toLowerCase();
             } else if(i == 2){
-                type = fields[i];
+                type = fields[i].toLowerCase();
             } else if(i == 3){
-                location = fields[i];
+                location = fields[i].toLowerCase();
             } else if(i == 4){
-                school = fields[i];
+                school = fields[i].toLowerCase();
             } else if(i == 5){
-                status = fields[i];
+                status = fields[i].toLowerCase();
             }
         }
     }
@@ -56,12 +56,12 @@ public class Person {
     }
 
     public Person(String name, String id, String type, String location, String school, String status) {
-        this.name = name;
-        this.id = id;
-        this.type = type;
-        this.location = location;
-        this.school = school;
-        this.status = status;
+        this.name = name.toLowerCase();
+        this.id = id.toLowerCase();
+        this.type = type.toLowerCase();
+        this.location = location.toLowerCase();
+        this.school = school.toLowerCase();
+        this.status = status.toLowerCase();
     }
 
     public String getName() {
