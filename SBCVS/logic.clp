@@ -24,7 +24,7 @@
 
 (deftemplate eleccion
 	(slot tipo (type STRING))
-	;(slot nucleo (type STRING))
+	(slot nucleo (type STRING))
 )
 
 (deftemplate regla
@@ -35,35 +35,63 @@
 	(slot nombre (type STRING))
 )
 
+(deftemplate registro
+	(slot nombre (type STRING))
+)
+
 ;---
 ;Fin Templates
 ;---
 
 
-;---
+;-----------------------------------------------------------------------------
 ;Reglas
-;---
+;-----------------------------------------------------------------------------
 
 ; ------------------------------- 
 ; REGLAS REGISTROS 
 ; -------------------------------
 
-(defrule r0
-	(persona (tipo "estudiante")(status "irregular"))
-	=>
-	(assert(candidato (nombre "No")))
-	(assert (regla (nombre "r0")))
-)
+; --
+; Regla Registro para Eleccion de Rector para Estudiantes Regulares
+; --
+	(defrule ReglaRegistroRectorEstudianteRegular "Regla Registro Rector, Vicerrector y Secretario"
+		(operacion (nombre "registro"))
+		(eleccion (tipo "rector, vicerrector y secretario")(nucleo ?n))
+		(persona (tipo "estudiante")(status "regular"))
+		=>
+		(assert(registro (nombre "Si")))
+		(assert (regla (nombre "ReglaRegistroRector")))
+		(printout t " Regla RegistroRector Estudiante Regular" crlf)
+	)
 
-(defrule r6
-    ;(operacion(nombre "postular"))
-    ;(eleccion (nucleo ?n))
-    ;(persona (nucleo ?np & ?n))
-    =>
-    (assert(candidato (nombre "No")))
-    (assert (regla (nombre "r6")))
-	(printout t ?np " " ?n " r6 " crlf)
-)
+
+;--
+;Regla Registro para Eleccion de Rector para Profesores
+;--
+	(defrule ReglaRegistroRectorProfesor "Regla Registro Rector, Vicerrector y Secretario"
+		(operacion (nombre "registro"))
+		(eleccion (tipo "rector, vicerrector y secretario")(nucleo ?n))
+		(persona (tipo "profesor"))
+		=>
+		(assert(registro (nombre "Si")))
+		(assert (regla (nombre "ReglaRegistroRector")))
+		(printout t " Regla RegistroRector Profesor" crlf)
+	)
+
+
+;--
+;Regla Registro para Eleccion de Rector para Egresados
+;--
+	(defrule ReglaRegistroRectorEgresado "Regla Registro Rector, Vicerrector y Secretario"
+		(operacion (nombre "registro"))
+		(eleccion (tipo "rector, vicerrector y secretario")(nucleo ?n))
+		(persona (tipo ?t & "egresado"))
+		=>
+		(assert(registro (nombre "Si")))
+		(assert (regla (nombre "ReglaRegistroRector")))
+		(printout t " Regla RegistroRector Egresado" crlf)
+	)
 
 ; ------------------------------- 
 ; FIN REGLAS REGISTROS
@@ -73,20 +101,24 @@
 ; REGLAS POSTULACIONES 
 ; -------------------------------
 
+;--
 ; Postulacion Rector, Vicerrector y Secretario
-(defrule ReglaPostulacionRector "Regla Postulacion Rector, Vicerrector y Secretario"
-	(eleccion (tipo "rector, vicerrector y secretario"))
-	(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
-	=>
-	(assert(candidato (nombre "Si")))
-	(assert (regla (nombre "ReglaPostulacionRector")))
-	(printout t " ReglaPostulacionRector " crlf)
-	)
+;--
+	(defrule ReglaPostulacionRector "Regla Postulacion Rector, Vicerrector y Secretario"
+		(eleccion (tipo "rector, vicerrector y secretario"))
+		(persona (tipo "profesor")(status "agregado"| "asociado" | "titular"))
+		(operacion (nombre "postulacion"))
+		=>
+		(assert(candidato (nombre "Si")))
+		(assert (regla (nombre "ReglaPostulacionRector")))
+		(printout t " ReglaPostulacionRector " crlf)
+		)
 
 ; Consejo Universitario
 (defrule ReglaPostulacionConsejoUniversitario "ConsejoUniversitario"
 	(eleccion (tipo "consejo universitario"))
 	(persona (tipo "profesor" | "estudiante"))
+	(operacion (nombre "postulacion"))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "ReglaPostulacionCU")))
@@ -96,6 +128,7 @@
 (defrule ReglaPostulacionJSUTA "JSU o TA"
 	(eleccion (tipo "junta superior universitaria" | "tribunal academico"))
 	(persona (tipo "profesor" | "estudiante" | "egresado"))
+	(operacion (nombre "postulacion"))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "ReglaPostulacionJSU/TA")))
@@ -105,6 +138,7 @@
 (defrule ReglaConsejoElectoralNucleo "Consejo Electoral de Nucleo"	
 	(eleccion (tipo "consejo electoral de nucleo"))
 	(persona (tipo "profesor" | "estudiante" | "egresado"))
+	(operacion (nombre "postulacion"))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "ReglaConsejoElectoralNucleo")))
@@ -114,6 +148,7 @@
 (defrule CPN "Consejo de Profesores de Nucleo"	
 	(eleccion (tipo "consejo de profesores de nucleo"))
 	(persona (tipo "profesor"))
+	(operacion (nombre "postulacion"))
 	=>
 	(assert(candidato (nombre "Si")))
 	(assert (regla (nombre "r5")))

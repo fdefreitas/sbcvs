@@ -28,9 +28,14 @@ public class Eleccion {
         return this.nombre;
     }
     
-    public String toString2(){
+    public String toSlotTipoNucleo(){
         return "(eleccion (tipo \"" + tipo.toLowerCase() + "\") (nucleo \"" + nucleo.toLowerCase() + "\"))";
     }
+    
+    public String toSlotTipo(){
+        return "(eleccion (tipo \"" + tipo.toLowerCase() + "\"))";
+    }
+    
     /**
      * @return the nombre
      */
