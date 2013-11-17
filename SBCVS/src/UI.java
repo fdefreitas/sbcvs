@@ -1,5 +1,6 @@
 
 import CLIPSJNI.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -214,75 +215,123 @@ public class UI extends javax.swing.JFrame {
     private void ConvocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConvocarButtonActionPerformed
         // TODO add your handling code here:
         try {
+            ArrayList<String> result = new ArrayList<>();
+            boolean flag = true;
             String eleccion = ((String)(eleccionPicker.getSelectedItem())).toLowerCase();
-            if(loadCLIPS()){
-                e.load("logic.clp");
-                for(Person p : cu.profesores){
+            for(Person p : cu.profesores){
+                if (loadCLIPS()) {
+                    e.load("logic.clp");
                     e.assertString(p.toString());
-                    e.assertString("(eleccion (tipo \""+eleccion+"\"))");
+                    e.assertString("(eleccion (tipo \"" + eleccion + "\"))");
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
-                    System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
-                    for (int i=0;i<hec.size();++i){
-                        FactAddressValue F = (FactAddressValue)hec.get(i);
+                    System.out.println(p.getName() + " " + p.getType() + " " + p.getStatus() + " " + hec.size());
+
+                    for (int i = 0; i < hec.size(); ++i) {
+                        FactAddressValue F = (FactAddressValue) hec.get(i);
                         System.out.println((F.getFactSlot("nombre").toString()));
+                        result.add((F.getFactSlot("nombre").toString()));
                     }
-                    if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
-                        cu.registro.add(p);
+                    if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
+                        for (String s : result) {
+                            flag &= s.equalsIgnoreCase("\"Si\"");
+                        }
+                        if (flag) {
+                            cu.registro.add(p);
+                        }
                     }
+                    e.reset();
+                    flag = true;
+                    result.clear();
                 }
-                
-                for(Person p : cu.egresados){
+            }
+
+            for(Person p : cu.egresados){
+                if (loadCLIPS()) {
+                    e.load("logic.clp");
                     e.assertString(p.toString());
-                    e.assertString("(eleccion (tipo \""+eleccion+"\"))");
+                    e.assertString("(eleccion (tipo \"" + eleccion + "\"))");
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
-                    System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
-                    for (int i=0;i<hec.size();++i){
-                        FactAddressValue F = (FactAddressValue)hec.get(i);
+//                    System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
+                    for (int i = 0; i < hec.size(); ++i) {
+                        FactAddressValue F = (FactAddressValue) hec.get(i);
                         System.out.println((F.getFactSlot("nombre").toString()));
+                        result.add((F.getFactSlot("nombre").toString()));
                     }
-                    if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
-                        cu.registro.add(p);
+                    if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
+                        for (String s : result) {
+                            flag &= s.equalsIgnoreCase("\"Si\"");
+                        }
+                        if (flag) {
+                            cu.registro.add(p);
+                        }
                     }
+                    e.reset();
+                    flag = true;
+                    result.clear();
                 }
-                
-                for(Person p : cu.empleados){
+            }
+
+            for(Person p : cu.empleados){
+                if (loadCLIPS()) {
+                    e.load("logic.clp");
                     e.assertString(p.toString());
-                    e.assertString("(eleccion (tipo \""+eleccion+"\"))");
+                    e.assertString("(eleccion (tipo \"" + eleccion + "\"))");
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
-                    System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
-                    for (int i=0;i<hec.size();++i){
-                        FactAddressValue F = (FactAddressValue)hec.get(i);
+//                    System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
+                    for (int i = 0; i < hec.size(); ++i) {
+                        FactAddressValue F = (FactAddressValue) hec.get(i);
                         System.out.println((F.getFactSlot("nombre").toString()));
+                        result.add((F.getFactSlot("nombre").toString()));
                     }
-                    if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
-                        cu.registro.add(p);
+                    if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
+                        for (String s : result) {
+                            flag &= s.equalsIgnoreCase("\"Si\"");
+                        }
+                        if (flag) {
+                            cu.registro.add(p);
+                        }
                     }
+                    e.reset();
+                    flag = true;
+                    result.clear();
                 }
-                
-                for(Person p : cu.estudiantes){
+            }
+
+            for(Person p : cu.estudiantes){
+                if (loadCLIPS()) {
+                    e.load("logic.clp");
                     e.assertString(p.toString());
-                    e.assertString("(eleccion (tipo \""+eleccion+"\"))");
+                    e.assertString("(eleccion (tipo \"" + eleccion + "\"))");
                     e.run();
                     //DIAGNOSTICO
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a candidato)) TRUE)");
                     List hec = P.multifieldValue();
                     System.out.println(p.getName() + " " + p.getType() + " " + hec.size());
-                    for (int i=0;i<hec.size();++i){
-                        FactAddressValue F = (FactAddressValue)hec.get(i);
+                    for (int i = 0; i < hec.size(); ++i) {
+                        FactAddressValue F = (FactAddressValue) hec.get(i);
                         System.out.println((F.getFactSlot("nombre").toString()));
+                        result.add((F.getFactSlot("nombre").toString()));
                     }
-                    if(true && !cu.registro.contains(p)){//agregar al registro dependiendo de hec
-                        cu.registro.add(p);
+                    if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
+                        for (String s : result) {
+                            flag &= s.equalsIgnoreCase("\"Si\"");
+                        }
+                        if (flag) {
+                            cu.registro.add(p);
+                        }
                     }
+                    e.reset();
+                    flag = true;
+                    result.clear();
                 }
             }
             verRegistroButton.setEnabled(true);
