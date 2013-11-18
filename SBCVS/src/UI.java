@@ -306,33 +306,34 @@ public class UI extends javax.swing.JFrame {
                 }
             }
 
-//            for(Person p : cu.empleados){
-//                if (loadCLIPS()) {
-//                     e.assertString(p.toString());
-//                    e.assertString(eleccion.toSlotTipoNucleo());
-//                    e.assertString(operacionRegistro);
-//                    System.out.println("\nEnviando:\n\t"+p.toString()+"\n\t"+eleccion.toSlotTipoNucleo()+"\n\t"+operacionRegistro+"\nRecibiendo:");
-//                    e.run();
-//                    //DIAGNOSTICO
-//                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a registro)) TRUE)");
-//                    List hec = P.multifieldValue();
-//                    for (int i = 0; i < hec.size(); ++i) {
-//                        FactAddressValue F = (FactAddressValue) hec.get(i);
-//                        result.add((F.getFactSlot("nombre").toString()));
-//                    }
-//                    if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
-//                        for (String s : result) {
-//                            flag &= s.equalsIgnoreCase("\"Si\"");
-//                        }
-//                        if (flag) {
-//                            cu.registro.add(p);
-//                        }
-//                    }
-//                    e.reset();
-//                    flag = true;
-//                    result.clear();
-//                }
-//            }
+            for(Person p : cu.empleados){
+                if (loadCLIPS()) {
+                    e.load("logic.clp");
+                    e.assertString(p.toString());
+                    e.assertString(eleccion.toSlotTipoNucleo());
+                    e.assertString(operacionRegistro);
+                    System.out.println("\nEnviando:\n\t"+p.toString()+"\n\t"+eleccion.toSlotTipoNucleo()+"\n\t"+operacionRegistro+"\nRecibiendo:");
+                    e.run();
+                    //DIAGNOSTICO
+                    MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a registro)) TRUE)");
+                    List hec = P.multifieldValue();
+                    for (int i = 0; i < hec.size(); ++i) {
+                        FactAddressValue F = (FactAddressValue) hec.get(i);
+                        result.add((F.getFactSlot("nombre").toString()));
+                    }
+                    if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
+                        for (String s : result) {
+                            flag &= s.equalsIgnoreCase("\"Si\"");
+                        }
+                        if (flag) {
+                            cu.registro.add(p);
+                        }
+                    }
+                    e.reset();
+                    flag = true;
+                    result.clear();
+                }
+            }
 
             //verificar estudiantes
             for(Person p : cu.estudiantes){
