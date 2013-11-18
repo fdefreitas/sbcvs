@@ -230,30 +230,37 @@ public class UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void convocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convocarButtonActionPerformed
-        //TODO Checks antes de llamar a clips de si ya estan en el registro para no agregarlos repetidos
         try {
+            //Limpiar registros y postulados
             cu.registro.clear();
             cu.postulados.clear();
+            
+            //Inicializar variables
             verPostuladosButton.setEnabled(false);
             ArrayList<String> result = new ArrayList<>();
             boolean flag = true;
             eleccion = (Eleccion) eleccionPicker.getSelectedItem();
+            
+            //verificar a cada miembro de la CU para comprobar si califica para el RE
+            //verificar profesores
             for(Person p : cu.profesores){
                 if (loadCLIPS()) {
+                    //hacer assert de la persona y la eleccion
                     e.load("logic.clp");
                     e.assertString(p.toString());
                     e.assertString(eleccion.toSlotTipoNucleo());
                     e.assertString(operacionRegistro);
                     System.out.println("\nEnviando:\n\t"+p.toString()+"\n\t"+eleccion.toSlotTipoNucleo()+"\n\t"+operacionRegistro+"\nRecibiendo:");
                     e.run();
-                    //DIAGNOSTICO
+                    //obtener resultados de la consulta
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a registro)) TRUE)");
                     List hec = P.multifieldValue();
                     for (int i = 0; i < hec.size(); ++i) {
                         FactAddressValue F = (FactAddressValue) hec.get(i);
                         result.add((F.getFactSlot("nombre").toString()));
                     }
-                    if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
+                    //agregar al registro dependiendo del resultado obtenido de la consulta
+                    if (!result.isEmpty() && !cu.registro.contains(p)) {
                         for (String s : result) {
                             flag &= s.equalsIgnoreCase("\"Si\"");
                         }
@@ -267,22 +274,25 @@ public class UI extends javax.swing.JFrame {
                 }
             }
 
+            //verificar egresados
             for(Person p : cu.egresados){
                 if (loadCLIPS()) {
+                    //hacer assert de la persona y la eleccion
                     e.load("logic.clp");
                     e.assertString(p.toString());
                     e.assertString(eleccion.toSlotTipoNucleo());
                     e.assertString(operacionRegistro);
                     System.out.println("\nEnviando:\n\t"+p.toString()+"\n\t"+eleccion.toSlotTipoNucleo()+"\n\t"+operacionRegistro+"\nRecibiendo:");
                     e.run();
-                    //DIAGNOSTICO
+                    //obtener resultados de la consulta
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a registro)) TRUE)");
                     List hec = P.multifieldValue();
                     for (int i = 0; i < hec.size(); ++i) {
                         FactAddressValue F = (FactAddressValue) hec.get(i);
                         result.add((F.getFactSlot("nombre").toString()));
                     }
-                    if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
+                    //agregar al registro dependiendo del resultado obtenido de la consulta
+                    if (!result.isEmpty() && !cu.registro.contains(p)) {
                         for (String s : result) {
                             flag &= s.equalsIgnoreCase("\"Si\"");
                         }
@@ -324,22 +334,25 @@ public class UI extends javax.swing.JFrame {
 //                }
 //            }
 
+            //verificar estudiantes
             for(Person p : cu.estudiantes){
                 if (loadCLIPS()) {
+                    //hacer assert de la persona y la eleccion
                     e.load("logic.clp"); 
                     e.assertString(p.toString());
                     e.assertString(eleccion.toSlotTipoNucleo());
                     e.assertString(operacionRegistro);
                     System.out.println("\nEnviando:\n\t"+p.toString()+"\n\t"+eleccion.toSlotTipoNucleo()+"\n\t"+operacionRegistro+"\nRecibiendo:");
                     e.run();
-                    //DIAGNOSTICO
+                    //obtener resultado de la consulta
                     MultifieldValue P = (MultifieldValue) e.eval("(find-all-facts ((?a registro)) TRUE)");
                     List hec = P.multifieldValue();
                     for (int i = 0; i < hec.size(); ++i) {
                         FactAddressValue F = (FactAddressValue) hec.get(i);
                         result.add((F.getFactSlot("nombre").toString()));
                     }
-                    if (!result.isEmpty() && !cu.registro.contains(p)) {//agregar al registro dependiendo de hec
+                    //agregar al registro dependiendo del resultado obtenido de la consulta
+                    if (!result.isEmpty() && !cu.registro.contains(p)) {
                         for (String s : result) {
                             flag &= s.equalsIgnoreCase("\"Si\"");
                         }
