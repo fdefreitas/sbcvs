@@ -375,7 +375,7 @@ public class UI extends javax.swing.JFrame {
                 System.out.println(String.format("%-16s %-48s %s\n",p.getId().toUpperCase(), p.getName().toUpperCase(), p.getType().toUpperCase()));
             }
         }
-        JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay nadie habilitado para votar", "Alerta", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay nadie habilitado para votar", "Registro Electoral", JOptionPane.DEFAULT_OPTION);
         list.delete(0, list.length());
     }//GEN-LAST:event_verRegistroButtonActionPerformed
 
@@ -390,7 +390,7 @@ public class UI extends javax.swing.JFrame {
                 System.out.println(String.format("%-16s %-48s %s\n",p.getId().toUpperCase(), p.getName().toUpperCase(), p.getType().toUpperCase()));
             }
         }
-        JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay candidatos postulados", "Alerta", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay candidatos postulados", "Listado de Postulados", JOptionPane.DEFAULT_OPTION);
         list.delete(0, list.length());
     }//GEN-LAST:event_verPostuladosButtonActionPerformed
 
@@ -455,7 +455,7 @@ public class UI extends javax.swing.JFrame {
                 System.out.println(String.format("%-16s %-32s %-48s %s\n",p.getId().toUpperCase(), p.getName().toUpperCase(), p.getType().toUpperCase(), p.getLocation().toUpperCase()));
             }
         }
-        JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay candidatos postulados", "Alerta", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showMessageDialog(this,list.length()!=0?list.toString():"No hay candidatos postulados", "Listado Comunidad Universitaria", JOptionPane.DEFAULT_OPTION);
         list.delete(0, list.length());
     }//GEN-LAST:event_jButton1ActionPerformed
     
