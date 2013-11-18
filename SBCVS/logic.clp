@@ -133,7 +133,7 @@
 		;--
 		;Registro para Eleccion de Junta Superior Universitaria para Profesores y Egresados
 		;--
-			(defrule ReglaRegistroRectorProfesorEgresado "Regla Registro Junta Superior Universitaria"
+			(defrule ReglaRegistroJuntaSuperiorUniversitariaProfesorEgresado "Regla Registro Junta Superior Universitaria"
 				(operacion (nombre "registro"))
 				(eleccion (tipo "junta superior universitaria")(nucleo ?n))
 				(persona (tipo "profesor"|"egresado"))
@@ -141,6 +141,32 @@
 				(assert(registro (nombre "Si")))
 				(assert (regla (nombre "ReglaRegistroJuntaSuperiorUniversitaria")))
 				(printout t " Regla RegistroJuntaSuperiorUniversitaria Profesor / Egresado" crlf)
+			)
+		
+		 --
+		; Registro para Eleccion de Tribunal Academico para Estudiantes Regulares
+		; --
+			(defrule ReglaRegistroTribunalEstudianteRegular "Regla Registro Tribunal Academico"
+				(operacion (nombre "registro"))
+				(eleccion (tipo "tribunal academico")(nucleo ?n))
+				(persona (tipo "estudiante")(status "regular"))
+				=>
+				(assert(registro (nombre "Si")))
+				(assert (regla (nombre "ReglaRegistroJuntaSuperiorUniversitariaEstudianteRegular")))
+				(printout t " Regla RegistroJuntaSuperiorUniversitaria Estudiante Regular" crlf)
+			)
+
+		;--
+		;Registro para Eleccion de Tribunal Academico para Profesores y Egresados
+		;--
+			(defrule ReglaRegistroTribunalProfesorEgresado "Regla Registro Tribunal Academico"
+				(operacion (nombre "registro"))
+				(eleccion (tipo "tribunal academico")(nucleo ?n))
+				(persona (tipo "profesor"|"egresado"))
+				=>
+				(assert(registro (nombre "Si")))
+				(assert (regla (nombre "ReglaRegistroTribunalProfesorEgresado")))
+				(printout t " Regla RegistroTribunal Profesor / Egresado" crlf)
 			)
 		
 		;--
